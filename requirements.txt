@@ -2,3 +2,6 @@ scikit-learn
 lightgbm
 optuna
 numpy
+pandas
+xgboost
+hyperopt
