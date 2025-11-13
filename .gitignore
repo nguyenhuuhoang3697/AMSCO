@@ -45,3 +45,6 @@ Thumbs.db
 # *.csv
 # *.json
 # *.pkl
+
+# Secrets (do not commit Kaggle API token)
+kaggle/kaggle.json
