@@ -38,12 +38,76 @@ pip install -r requirements.txt
 ```
 
 4. Tải datasets:
-- Breast Cancer: Được tích hợp sẵn trong scikit-learn
-- Adult Income: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/adult)
-- Telco Customer Churn: [Kaggle](https://www.kaggle.com/blastchar/telco-customer-churn)
-  - Tải file và lưu vào `datasets/telco.csv`
-- Credit Card Fraud: [Kaggle](https://www.kaggle.com/mlg-ulb/creditcardfraud)
-  - Tải file và lưu vào `datasets/creditcard.csv`
+
+- Breast Cancer: Được tích hợp sẵn trong scikit-learn (không cần tải)
+- Adult Income (UCI): Có thể tải tự động bằng script hoặc thủ công theo hướng dẫn dưới.
+- Telco Customer Churn (Kaggle): Cần tài khoản Kaggle và API key.
+- Credit Card Fraud (Kaggle): Cần tài khoản Kaggle và API key.
+
+Tùy chọn A — Tải nhanh (Linux/macOS):
+```bash
+# Tạo thư mục datasets nếu chưa có
+mkdir -p datasets
+
+# Chạy script tải dữ liệu Adult từ UCI (đã kèm sẵn)
+# Script sẽ GHÉP train/test thành một file duy nhất: datasets/adult.csv
+# và loại bỏ thư mục con datasets/adult/ cùng các file gốc adult.data / adult.test / adult.names
+bash scripts/download_datasets.sh
+```
+
+Tùy chọn B — Hướng dẫn chi tiết theo từng bộ dữ liệu:
+
+1) Adult Income (UCI)
+```bash
+mkdir -p datasets/adult
+BASE_UCI="https://archive.ics.uci.edu/ml/machine-learning-databases/adult"
+curl -fsSL "$BASE_UCI/adult.data" -o datasets/adult/adult.data
+curl -fsSL "$BASE_UCI/adult.test" -o datasets/adult/adult.test
+curl -fsSL "$BASE_UCI/adult.names" -o datasets/adult/adult.names || true
+# Gộp và chuyển về datasets/adult.csv, đồng thời xóa thư mục con datasets/adult
+python3 scripts/prepare_adult.py
+```
+
+2) Telco Customer Churn (Kaggle)
+- Cài đặt Kaggle CLI (chỉ cần 1 lần, ngoài môi trường dự án):
+```bash
+pip install kaggle
+mkdir -p ~/.kaggle
+# Tải API token từ https://www.kaggle.com/settings (kaggle.json)
+# Sau đó đặt vào ~/.kaggle/kaggle.json và phân quyền an toàn
+chmod 600 ~/.kaggle/kaggle.json
+```
+- Tải và đổi tên file:
+```bash
+mkdir -p datasets
+kaggle datasets download -d blastchar/telco-customer-churn -p datasets
+unzip -o datasets/telco-customer-churn.zip -d datasets
+# File gốc: WA_Fn-UseC_-Telco-Customer-Churn.csv
+mv -f "datasets/WA_Fn-UseC_-Telco-Customer-Churn.csv" datasets/telco.csv
+```
+
+3) Credit Card Fraud (Kaggle)
+```bash
+mkdir -p datasets
+kaggle datasets download -d mlg-ulb/creditcardfraud -p datasets
+unzip -o datasets/creditcardfraud.zip -d datasets
+mv -f datasets/creditcard.csv datasets/creditcard.csv  # đảm bảo tên đích đúng
+```
+
+Lưu ý:
+- Các tập dữ liệu Kaggle yêu cầu đăng nhập và tạo API token theo điều khoản Kaggle.
+- Nếu không muốn dùng Kaggle CLI, bạn có thể tải thủ công từ trang Kaggle và đặt file vào:
+  - `datasets/telco.csv`
+  - `datasets/creditcard.csv`
+
+Tùy chọn C — Tải nhanh 2 bộ Kaggle (nếu đã có API token):
+```bash
+# Sau khi đã có ~/.kaggle/kaggle.json (chmod 600)
+bash scripts/download_kaggle_datasets.sh
+# Kết quả:
+# - datasets/telco.csv
+# - datasets/creditcard.csv
+```
 
 ## Cấu trúc thư mục
 ```
