@@ -1,0 +1,12 @@
+nohup: ignoring input
+Watching log…
+TELEGRAM_TOKEN set: True, CHAT_ID set: True
+Following log file: output.log
+[TELEGRAM] Sent initial snapshot (18 lines).
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)

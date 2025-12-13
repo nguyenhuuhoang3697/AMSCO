@@ -1,0 +1,120 @@
+nohup: ignoring input
+[INFO] Bắt đầu chạy lúc: 2025-11-17 10:41:22
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Evaluation] StratifiedKFold (5-fold)
+
+Thực thi: Optuna (TPE)...
+
+Thực thi: AMSCO...
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8528 0.6614  0.9066         50.37        50.36         30.61       275.98           22         4      18.18%
+       AMSCO   0.8528 0.6614  0.9066         37.89        37.88         30.02       288.09           18         6      33.33%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Evaluation] StratifiedKFold (5-fold)
+
+Thực thi: Optuna (TPE)...
+
+Thực thi: AMSCO...
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8655 0.6857  0.9187       1210.35      6993.08         42.04       472.15           48        28      58.33%
+       AMSCO   0.8648 0.6824  0.9164        396.36      2228.60         41.21       514.44           19        14      73.68%
+
+------------------------------------------------------------
+
+
+
+============================================================
+                    KẾT QUẢ THỬ NGHIỆM TỔNG QUÁT                    
+============================================================
+
+
+BẢNG TÓM TẮT (Dataset, Method, Mean Accuracy, Std Dev, Mean Time (s), Convergence Speed):
+------------------------------------------------------------
+Dataset       Method Mean Accuracy Std Dev Mean Time (s) Convergence Speed
+  adult        AMSCO        0.8588  0.0085        217.13          0.003955
+  adult Optuna (TPE)        0.8592  0.0090        630.36          0.001363
+
+
+BẢNG HIỆU NĂNG TỐI ƯU HÓA (Time / Iterations / Resource):
+----------------------------------------------------------------------
+Dataset       Method Mean Wall Time (s) Mean CPU Time (s) Mean Peak Mem (MB) Mean Total Trials Mean Iter→Best Mean Conv. Ratio
+  adult        AMSCO             217.13           1133.24              35.61              18.5           10.0           53.51%
+  adult Optuna (TPE)             630.36           3521.72              36.33              35.0           16.0           38.26%
+
+
+BẢNG SO SÁNH CV (Method, Without CV, With K-Fold (k=5), With Nested CV, Improvement (%)):
+------------------------------------------------------------
+      Method Without CV With K-Fold (k=5) With Nested CV Improvement (%)
+       AMSCO     0.8595            0.8588         0.8591           -0.08
+Optuna (TPE)     0.8594            0.8592         0.8588           -0.02
+
+
+BẢNG ĐÁNH GIÁ CV (Evaluation Method, Accuracy, F1-Score, AUC-ROC, Time):
+------------------------------------------------------------
+              Evaluation Method Accuracy F1-Score AUC-ROC   Time
+   Simple Holdout (80-20 split)   0.8594   0.6741  0.9116   2.88
+          Standard K-Fold (k=5)   0.8590   0.6727  0.9120  57.19
+   Nested CV (5-outer, 3-inner)   0.8589   0.6726  0.9125 510.21
+Improvement (Nested vs Holdout)   -0.06%   -0.23%   0.09%      -
+
+
+BẢNG SO SÁNH THỐNG KÊ (TÀI NGUYÊN TỐI ƯU HÓA – AMSCO vs BASELINES):
+--------------------------------------------------------------------------------
+           Metric            Comparison Mean AMSCO Mean Baseline Δ (Baseline-AMSCO) U-statistic p-value Significant (α=0.05) Cohen's d Effect Size    Preferred
+    Wall Time (s) AMSCO vs Optuna (TPE)    217.128       630.358            413.230       1.000  0.6667                   No    -0.729      Medium        AMSCO
+     CPU Time (s) AMSCO vs Optuna (TPE)   1133.240      3521.719           2388.479       1.000  0.6667                   No    -0.711      Medium        AMSCO
+     Total Trials AMSCO vs Optuna (TPE)     18.500        35.000             16.500       0.000  0.3333                   No    -0.933       Large        AMSCO
+        Iter→Best AMSCO vs Optuna (TPE)     10.000        16.000              6.000       2.000  1.0000                   No    -0.530      Medium        AMSCO
+Convergence Ratio AMSCO vs Optuna (TPE)      0.535         0.383             -0.153       3.000  0.6667                   No   108.187  Very Large Optuna (TPE)
+ Peak Memory (MB) AMSCO vs Optuna (TPE)     35.614        36.325              0.711       1.000  0.6667                   No    -4.400  Very Large        AMSCO
+  RSS Memory (MB) AMSCO vs Optuna (TPE)    401.266       374.066            -27.199       3.000  0.6667                   No     1.275  Very Large Optuna (TPE)
+
+
+
+BẢNG TỔNG HỢP THEO OPTIMIZER (HÀNG = METRIC):
+------------------------------------------------------------
+               Metric  AMSCO Optuna (TPE) Hyperopt (TPE) Random Search
+      Accuracy (CV=5) 0.8588       0.8592            nan           nan
+     Precision (CV=5) 0.7573       0.7568            nan           nan
+        Recall (CV=5) 0.6041       0.6071            nan           nan
+ F1-score (CV metric) 0.6719       0.6736            nan           nan
+  AUC-ROC (CV metric) 0.9115       0.9126            nan           nan
+  Balanced Acc (CV=5) 0.7715       0.7728            nan           nan
+Optimization Time (s) 217.13       630.36            nan           nan
+
+
+
+=======================================================
+         KẾT QUẢ THỬ NGHIỆM TỔNG QUÁT
+=======================================================
+dataset               model    optimizer primary_metric  primary_score  accuracy       f1  roc_auc  acc_holdout  f1_holdout  auc_holdout  acc_cv5  prec_cv5  recall_cv5  bal_acc_cv5        time  opt_wall_time  opt_cpu_time  opt_peak_memory_mb  opt_rss_memory_mb  opt_total_trials  opt_iter_best  opt_convergence_ratio  time_holdout   time_cv5 evaluation
+  adult logistic_regression Optuna (TPE)       accuracy       0.852832  0.852832 0.661417 0.906619     0.851264    0.658198     0.905672 0.852832  0.735656    0.601011     0.766526   50.366407      50.366407     50.357720           30.612706         275.984375                22              4               0.181818      0.330547   5.310366   cv_5fold
+  adult logistic_regression        AMSCO       accuracy       0.852791  0.852791 0.661418 0.906562     0.851367    0.658674     0.905258 0.852791  0.735415    0.601182     0.766558   37.891495      37.891495     37.884513           30.015665         288.093750                18              6               0.333333      0.534484   4.148458   cv_5fold
+  adult       random_forest Optuna (TPE)       accuracy       0.865546  0.865546 0.685741 0.918652     0.867438    0.690117     0.918780 0.865546  0.777954    0.613160     0.779047 1210.350495    1210.350495   6993.080218           42.037817         472.148438                48             28               0.583333      5.943508 126.061000   cv_5fold
+  adult       random_forest        AMSCO       accuracy       0.864768  0.864768 0.682357 0.916366     0.867540    0.689539     0.916753 0.864768  0.779121    0.607085     0.776453  396.364948     396.364948   2228.596140           41.212162         514.437500                19             14               0.736842      4.697708  93.252303   cv_5fold
+
+[INFO] Kết thúc chạy lúc: 2025-11-17 11:49:21 (tổng thời gian: 4078.39 s)

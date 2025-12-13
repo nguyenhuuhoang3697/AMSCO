@@ -1,0 +1,7 @@
+seed,dataset,model,score
+1,adult,logistic_regression,0.8526677639999917
+1,adult,random_forest,0.8644813704100603
+2,adult,logistic_regression,0.8526882390204668
+2,adult,random_forest,0.8643790091413087
+3,adult,logistic_regression,0.8526882365052625
+3,adult,random_forest,0.8644404178539059

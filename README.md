@@ -126,6 +126,12 @@ AMSCO/
 1. Mở Jupyter Notebook:
 ```bash
 jupyter notebook amsco.ipynb
+nohup python -u amsco_adult_v2.py > output.log 2>&1 &
+pip install pillow python-telegram-bot==13.15
+export TELEGRAM_TOKEN/TELEGRAM_CHAT_ID
+nohup python -u send_log_to_telegram.py > log_watcher.log 2>&1 &     #send noti to telegram
+ps -eo pid,cmd | grep python
+pkill -f "python -u amsco_adult_v2.py"
 ```
 
 2. Chạy các cell theo thứ tự để:

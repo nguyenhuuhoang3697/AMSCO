@@ -1,0 +1,1889 @@
+nohup: ignoring input
+[INFO] Bắt đầu chạy lúc: 2025-12-02 17:23:19
+
+########## SEED 1 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=1)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9581, 0.9835], AUC[0.9888, 0.9960], Time[0.0244, 0.0274]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9877, 0.9963], Time[0.0244, 0.0287]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9842 0.9875  0.9957         16.05        16.04          1.58       225.71           50        30      60.00%
+       AMSCO   0.9842 0.9875  0.9957          6.65         6.65          0.79       226.34           16         9      56.25%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9582, 0.9651], AUC[0.9896, 0.9925], Time[0.7907, 2.0559]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9582, 0.9706], AUC[0.9889, 0.9934], Time[0.6285, 2.1407]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9613 0.9693  0.9916        659.54       712.46          2.10       232.78           76        56      73.68%
+       AMSCO   0.9560 0.9651  0.9909        280.79       302.78          1.54       234.07           31        15      48.39%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=1)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6053, 0.6614], AUC[0.8961, 0.9066], Time[0.2266, 0.5298]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6053, 0.6614], AUC[0.8961, 0.9066], Time[0.2266, 0.5815]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8530 0.6612  0.9064        104.63       104.61         30.25       279.99           38        18      47.37%
+       AMSCO   0.8529 0.6608  0.9064         67.53        67.52         30.04       306.73           19        11      57.89%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6070, 0.6830], AUC[0.9033, 0.9180], Time[1.0239, 5.5905]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4866, 0.6854], AUC[0.8989, 0.9184], Time[1.0239, 7.1477]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8647 0.6835  0.9176       1097.51      5813.80         41.66       481.63           63        43      68.25%
+       AMSCO   0.8641 0.6792  0.9171        648.41      3588.85         40.90       481.63           23        15      65.22%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=1)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5645, 0.5969], AUC[0.8419, 0.8446], Time[0.2997, 0.4228]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5159, 0.5974], AUC[0.8408, 0.8446], Time[0.2969, 0.6828]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7992 0.5875  0.8437        128.46       468.62          6.81       481.63           44        24      54.55%
+       AMSCO   0.8001 0.5894  0.8438         58.73       207.08          6.57       481.63           16         8      50.00%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.0000], AUC[0.6438, 0.8228], Time[0.9012, 2.3891]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4366], AUC[0.6102, 0.8337], Time[0.8494, 2.4590]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7659 0.2785  0.8309        394.11       477.67          9.07       481.63           42        22      52.38%
+       AMSCO   0.7856 0.4355  0.8328        409.98       538.08          8.86       481.63           40        22      55.00%
+
+------------------------------------------------------------
+
+
+########## SEED 2 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=2)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9679, 0.9848], AUC[0.9887, 0.9963], Time[0.0240, 0.0275]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9876, 0.9963], Time[0.0240, 0.0277]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9789 0.9835  0.9958          7.97         7.97          0.93       481.63           21         1       4.76%
+       AMSCO   0.9789 0.9835  0.9958          6.86         6.86          0.79       481.63           17        10      58.82%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9582, 0.9639], AUC[0.9889, 0.9927], Time[0.5830, 2.1490]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9574, 0.9706], AUC[0.9888, 0.9935], Time[0.5830, 2.1490]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9508 0.9614  0.9909        713.28       770.59          1.91       481.63           85        65      76.47%
+       AMSCO   0.9526 0.9625  0.9917        365.22       393.91          1.54       481.63           47        21      44.68%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=2)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6529, 0.6614], AUC[0.9060, 0.9066], Time[0.2690, 0.5517]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5926, 0.6614], AUC[0.8940, 0.9066], Time[0.2227, 0.6179]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8526 0.6607  0.9065        107.72       107.70         30.36       481.63           38        18      47.37%
+       AMSCO   0.8523 0.6591  0.9065         63.92        63.91         30.04       485.98           18         7      38.89%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6208, 0.6764], AUC[0.9078, 0.9182], Time[2.3390, 5.4480]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4691, 0.6857], AUC[0.8984, 0.9185], Time[1.1809, 7.3936]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8652 0.6851  0.9177       1075.18      5733.56         41.48       489.99           59        39      66.10%
+       AMSCO   0.8640 0.6764  0.9173        984.25      5048.60         41.41       489.99           50        38      76.00%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=2)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4858, 0.5964], AUC[0.8403, 0.8446], Time[0.2936, 0.4281]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4858, 0.5974], AUC[0.8403, 0.8446], Time[0.2936, 0.4281]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8015 0.5917  0.8438        129.00       461.41          6.79       489.99           46        37      80.43%
+       AMSCO   0.8011 0.5904  0.8438        103.66       375.48          6.64       489.99           35        24      68.57%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.3836], AUC[0.6104, 0.8327], Time[0.9350, 2.3444]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4401], AUC[0.6102, 0.8340], Time[0.8794, 2.5394]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7863 0.4450  0.8338        421.94       567.20          8.94       489.99           45        25      55.56%
+       AMSCO   0.7713 0.3309  0.8292        409.60       480.25          8.73       489.99           33        14      42.42%
+
+------------------------------------------------------------
+
+
+########## SEED 3 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=3)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9722, 0.9835], AUC[0.9892, 0.9959], Time[0.0249, 0.0269]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9877, 0.9962], Time[0.0243, 0.0279]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9789 0.9834  0.9953         13.65        13.65          0.99       489.99           43        23      53.49%
+       AMSCO   0.9789 0.9834  0.9953          7.04         7.04          0.79       489.99           18         5      27.78%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9598, 0.9665], AUC[0.9892, 0.9924], Time[0.6244, 2.1283]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9582, 0.9706], AUC[0.9891, 0.9935], Time[0.6200, 2.1283]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9579 0.9666  0.9896        717.93       775.06          1.89       489.99           85        65      76.47%
+       AMSCO   0.9561 0.9652  0.9879        298.77       322.81          1.53       489.99           33        14      42.42%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=3)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5999, 0.6614], AUC[0.8954, 0.9066], Time[0.2256, 0.5416]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5983, 0.6614], AUC[0.8949, 0.9066], Time[0.2178, 0.5512]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8526 0.6602  0.9067        140.49       140.47         30.41       489.99           59        39      66.10%
+       AMSCO   0.8524 0.6595  0.9066         67.57        67.56         30.04       493.50           18         9      50.00%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6524, 0.6755], AUC[0.9130, 0.9180], Time[1.4566, 6.1955]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5725, 0.6856], AUC[0.8988, 0.9186], Time[1.0327, 7.2150]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8647 0.6831  0.9181        799.86      4336.85         41.22       510.99           38        18      47.37%
+       AMSCO   0.8649 0.6832  0.9178       1187.82      6498.68         41.57       517.03           49        30      61.22%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=3)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4815, 0.5968], AUC[0.8402, 0.8445], Time[0.2938, 0.4148]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4815, 0.5974], AUC[0.8402, 0.8446], Time[0.2938, 0.4281]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8024 0.5926  0.8448         96.06       336.31          7.13       517.03           32        12      37.50%
+       AMSCO   0.8011 0.5908  0.8447         77.61       283.56          6.61       517.03           23        12      52.17%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.0000], AUC[0.6827, 0.8222], Time[0.8338, 2.4557]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4383], AUC[0.6102, 0.8342], Time[0.8338, 2.5364]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7815 0.4182  0.8341        714.76       972.95          9.15       517.03           92        72      78.26%
+       AMSCO   0.7829 0.4249  0.8328        555.54       692.82          9.04       517.03           56        40      71.43%
+
+------------------------------------------------------------
+
+
+########## SEED 4 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=4)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9835], AUC[0.9885, 0.9961], Time[0.0244, 0.0265]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9882, 0.9962], Time[0.0239, 0.0272]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9824 0.9861  0.9959          7.96         7.95          0.78       517.03           21         1       4.76%
+       AMSCO   0.9824 0.9861  0.9963          7.25         7.25          0.79       517.03           19         5      26.32%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9556, 0.9665], AUC[0.9883, 0.9924], Time[0.6622, 2.1093]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9556, 0.9694], AUC[0.9883, 0.9933], Time[0.6290, 2.1093]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9614 0.9692  0.9913        308.45       333.24          1.45       517.03           30        10      33.33%
+       AMSCO   0.9561 0.9650  0.9927        392.22       422.79          1.36       517.03           51        33      64.71%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=4)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6401, 0.6614], AUC[0.9036, 0.9066], Time[0.2562, 0.5852]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6162, 0.6614], AUC[0.8986, 0.9066], Time[0.2415, 0.5934]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8527 0.6606  0.9067        157.33       157.30         30.34       517.03           62        42      67.74%
+       AMSCO   0.8526 0.6604  0.9066         70.49        70.48         30.15       527.15           19        10      52.63%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6350, 0.6827], AUC[0.9086, 0.9183], Time[1.3865, 5.7898]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4877, 0.6850], AUC[0.8984, 0.9186], Time[0.8536, 8.5959]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8649 0.6833  0.9175       1012.27      5528.22         41.38       527.15           52        32      61.54%
+       AMSCO   0.8654 0.6855  0.9175       1383.57      7176.70         41.48       542.72           71        58      81.69%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=4)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5559, 0.5960], AUC[0.8416, 0.8445], Time[0.2981, 0.4267]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5110, 0.5974], AUC[0.8408, 0.8446], Time[0.2944, 1.1995]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8034 0.5951  0.8447        101.64       377.46          6.92       542.72           32        12      37.50%
+       AMSCO   0.8032 0.5950  0.8447         66.59       240.95          6.59       542.72           19         7      36.84%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.0000], AUC[0.5834, 0.8213], Time[0.8224, 2.2229]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.3727], AUC[0.5830, 0.8325], Time[0.8224, 2.4382]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7635 0.2594  0.8300        691.53       790.00          8.99       542.72           90        70      77.78%
+       AMSCO   0.7346 0.0000  0.8006        330.07       360.88          8.45       542.72           28        16      57.14%
+
+------------------------------------------------------------
+
+
+########## SEED 5 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=5)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9707, 0.9822], AUC[0.9898, 0.9961], Time[0.0245, 0.0271]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9877, 0.9963], Time[0.0245, 0.0277]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9807 0.9848  0.9952         16.08        16.08          1.01       542.72           52        32      61.54%
+       AMSCO   0.9824 0.9862  0.9944          8.37         8.37          0.84       542.72           23        12      52.17%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9597, 0.9651], AUC[0.9900, 0.9917], Time[0.6874, 1.9973]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9582, 0.9694], AUC[0.9888, 0.9933], Time[0.6257, 2.1074]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9631 0.9710  0.9899        305.07       329.67          1.52       542.72           30        10      33.33%
+       AMSCO   0.9543 0.9641  0.9890        280.80       302.50          1.53       542.72           29        17      58.62%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=5)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6391, 0.6614], AUC[0.9033, 0.9066], Time[0.2526, 0.5642]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6034, 0.6614], AUC[0.8959, 0.9066], Time[0.2193, 0.5685]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8529 0.6608  0.9067        116.05       116.02         30.24       542.72           43        23      53.49%
+       AMSCO   0.8529 0.6609  0.9067         63.24        63.23         30.04       542.72           18         4      22.22%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5788, 0.6808], AUC[0.9031, 0.9171], Time[1.4642, 9.0154]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5705, 0.6873], AUC[0.8988, 0.9186], Time[0.9289, 9.0154]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8638 0.6803  0.9173       1334.47      7259.63         41.97       542.72           72        52      72.22%
+       AMSCO   0.8638 0.6805  0.9161        658.05      3498.52         41.20       542.72           27        19      70.37%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=5)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4343, 0.5947], AUC[0.8395, 0.8444], Time[0.2942, 0.4492]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4343, 0.5974], AUC[0.8395, 0.8446], Time[0.2942, 1.0112]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8034 0.5950  0.8453        228.96       817.09          7.06       542.72           88        68      77.27%
+       AMSCO   0.8036 0.5956  0.8453         66.31       245.74          6.59       542.72           18         8      44.44%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.0000], AUC[0.6296, 0.8184], Time[0.9685, 2.2208]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4336], AUC[0.6102, 0.8334], Time[0.8628, 2.4684]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7687 0.3094  0.8298        397.60       481.03          8.81       542.72           42        22      52.38%
+       AMSCO   0.7784 0.3801  0.8332        559.82       832.43          8.85       542.72           45        26      57.78%
+
+------------------------------------------------------------
+
+
+########## SEED 6 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=6)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9707, 0.9848], AUC[0.9893, 0.9963], Time[0.0244, 0.0269]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9884, 0.9963], Time[0.0243, 0.0275]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9807 0.9847  0.9950         10.48        10.48          1.12       542.72           31        11      35.48%
+       AMSCO   0.9807 0.9845  0.9953          9.99         9.99          0.81       542.72           30        13      43.33%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9597, 0.9652], AUC[0.9890, 0.9928], Time[0.6573, 1.9033]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9582, 0.9694], AUC[0.9890, 0.9937], Time[0.6195, 2.0860]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9666 0.9735  0.9893        617.15       666.01          1.93       542.72           74        54      72.97%
+       AMSCO   0.9631 0.9707  0.9908        381.10       411.13          1.63       542.72           50        34      68.00%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=6)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6252, 0.6614], AUC[0.9002, 0.9066], Time[0.2340, 0.5386]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6162, 0.6615], AUC[0.8986, 0.9066], Time[0.2340, 0.5451]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8527 0.6607  0.9066        112.75       112.73         30.52       542.72           42        22      52.38%
+       AMSCO   0.8525 0.6591  0.9066         68.54        68.52         30.06       545.63           19         5      26.32%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5789, 0.6846], AUC[0.9021, 0.9184], Time[0.8598, 6.2574]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4691, 0.6846], AUC[0.8978, 0.9185], Time[0.8598, 7.8676]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8653 0.6853  0.9175       1150.82      6124.46         41.89       547.09           66        46      69.70%
+       AMSCO   0.8651 0.6828  0.9178        780.75      4060.62         41.56       548.88           34        15      44.12%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=6)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4678, 0.5941], AUC[0.8399, 0.8443], Time[0.2937, 0.4157]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4678, 0.5974], AUC[0.8399, 0.8446], Time[0.2937, 0.4261]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8026 0.5922  0.8441         98.81       350.15          6.78       548.88           33        13      39.39%
+       AMSCO   0.8019 0.5906  0.8440         61.01       215.84          6.59       548.88           17         2      11.76%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.3120], AUC[0.6437, 0.8310], Time[0.8716, 2.4214]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4395], AUC[0.6102, 0.8341], Time[0.8716, 2.5121]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7852 0.4387  0.8320        422.07       565.07          8.95       548.88           45        25      55.56%
+       AMSCO   0.7346 0.0000  0.8085        385.20       436.04          8.42       548.88           37        18      48.65%
+
+------------------------------------------------------------
+
+
+########## SEED 7 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=7)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9596, 0.9848], AUC[0.9899, 0.9963], Time[0.0245, 0.0261]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9877, 0.9963], Time[0.0243, 0.0279]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9807 0.9848  0.9945         19.23        19.22          1.05       548.88           64        44      68.75%
+       AMSCO   0.9807 0.9848  0.9946          7.29         7.29          0.80       548.88           19         2      10.53%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9600, 0.9680], AUC[0.9888, 0.9921], Time[0.7233, 2.1491]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9586, 0.9706], AUC[0.9888, 0.9933], Time[0.6275, 2.1491]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9596 0.9677  0.9889        649.31       701.09          2.02       548.88           76        56      73.68%
+       AMSCO   0.9614 0.9693  0.9897        446.13       481.13          1.63       548.88           60        54      90.00%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=7)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6393, 0.6614], AUC[0.9033, 0.9066], Time[0.2438, 0.5267]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6162, 0.6615], AUC[0.8986, 0.9066], Time[0.2311, 0.5431]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8525 0.6606  0.9066        101.10       101.08         30.27       556.41           39        19      48.72%
+       AMSCO   0.8528 0.6610  0.9066         65.30        65.29         30.04       556.41           19         7      36.84%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4784, 0.6764], AUC[0.8976, 0.9175], Time[1.1562, 5.8078]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4784, 0.6840], AUC[0.8976, 0.9184], Time[1.0917, 9.5890]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8636 0.6774  0.9165        745.97      3737.52         41.28       556.41           43        23      53.49%
+       AMSCO   0.8645 0.6780  0.9178       1218.74      6699.71         41.65       573.86           56        50      89.29%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=7)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5801, 0.5965], AUC[0.8420, 0.8445], Time[0.3048, 0.4425]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5159, 0.5974], AUC[0.8408, 0.8446], Time[0.2981, 0.4425]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8035 0.5965  0.8445         98.52       352.90          7.01       573.86           32        12      37.50%
+       AMSCO   0.8031 0.5939  0.8437         66.66       237.64          6.56       573.86           19         4      21.05%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4144], AUC[0.6552, 0.8331], Time[0.9153, 2.8125]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4144], AUC[0.5830, 0.8336], Time[0.8216, 2.8125]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7825 0.4168  0.8339        884.95      1189.88          9.27       573.86          100        96      96.00%
+       AMSCO   0.7857 0.4416  0.8329        495.18       730.61          8.85       573.86           47        30      63.83%
+
+------------------------------------------------------------
+
+
+########## SEED 8 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=8)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9707, 0.9835], AUC[0.9877, 0.9962], Time[0.0245, 0.0287]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9848], AUC[0.9877, 0.9962], Time[0.0245, 0.0287]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9789 0.9834  0.9948         16.28        16.28          1.02       573.86           52        32      61.54%
+       AMSCO   0.9806 0.9848  0.9946         16.19        16.19          0.86       573.86           53        43      81.13%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9600, 0.9665], AUC[0.9887, 0.9933], Time[0.5873, 1.9246]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9572, 0.9694], AUC[0.9887, 0.9935], Time[0.5873, 2.1002]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9578 0.9666  0.9895        635.77       685.23          2.08       573.86           74        54      72.97%
+       AMSCO   0.9525 0.9622  0.9887        178.09       192.42          1.37       573.86           19         6      31.58%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=8)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6426, 0.6615], AUC[0.9043, 0.9066], Time[0.2451, 0.5319]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6162, 0.6615], AUC[0.8986, 0.9066], Time[0.2292, 0.5518]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8527 0.6607  0.9068        174.11       174.07         30.32       574.28           72        52      72.22%
+       AMSCO   0.8527 0.6606  0.9068         68.55        68.54         30.03       576.45           19         8      42.11%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5761, 0.6780], AUC[0.8992, 0.9184], Time[1.2218, 4.9759]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4856, 0.6840], AUC[0.8981, 0.9184], Time[1.1762, 7.1896]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8637 0.6765  0.9163        754.76      3819.18         41.71       576.86           43        23      53.49%
+       AMSCO   0.8644 0.6801  0.9180        998.90      5337.26         41.40       577.70           43        17      39.53%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=8)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5579, 0.5959], AUC[0.8417, 0.8446], Time[0.2982, 1.1759]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5159, 0.5974], AUC[0.8408, 0.8446], Time[0.2982, 1.1759]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8009 0.5917  0.8436        128.01       477.59          6.80       577.70           42        22      52.38%
+       AMSCO   0.7997 0.5886  0.8436         64.81       221.36          6.59       577.70           19         4      21.05%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.0000], AUC[0.6937, 0.8207], Time[1.0056, 2.4489]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4395], AUC[0.6102, 0.8345], Time[0.8389, 2.5024]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7795 0.3991  0.8312        433.94       571.27          9.11       577.70           46        26      56.52%
+       AMSCO   0.7784 0.3887  0.8324        449.19       606.76          8.90       577.70           33        14      42.42%
+
+------------------------------------------------------------
+
+
+########## SEED 9 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=9)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9694, 0.9835], AUC[0.9901, 0.9961], Time[0.0246, 0.0277]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9567, 0.9835], AUC[0.9884, 0.9962], Time[0.0243, 0.0277]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9807 0.9847  0.9953          8.07         8.07          0.95       577.70           21         1       4.76%
+       AMSCO   0.9824 0.9861  0.9953          6.81         6.81          0.80       577.70           17        10      58.82%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9585, 0.9666], AUC[0.9888, 0.9925], Time[0.6479, 2.0555]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9585, 0.9706], AUC[0.9883, 0.9933], Time[0.6025, 2.0980]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9701 0.9763  0.9930        631.51       680.86          1.95       577.70           76        56      73.68%
+       AMSCO   0.9631 0.9708  0.9918        362.30       390.74          1.77       577.70           52        33      63.46%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=9)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6275, 0.6614], AUC[0.9008, 0.9066], Time[0.2389, 0.5315]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5963, 0.6614], AUC[0.8946, 0.9066], Time[0.2196, 0.5730]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8523 0.6595  0.9066        115.07       115.05         30.48       580.04           43        23      53.49%
+       AMSCO   0.8522 0.6589  0.9066         63.19        63.17         30.03       590.95           17         4      23.53%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4845, 0.6807], AUC[0.8974, 0.9182], Time[2.1935, 5.4841]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4845, 0.6850], AUC[0.8974, 0.9185], Time[1.1386, 7.9027]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8637 0.6781  0.9162        579.97      2840.85         40.76       590.95           28         8      28.57%
+       AMSCO   0.8641 0.6789  0.9173       1109.37      5942.83         41.59       590.95           52        46      88.46%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=9)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5401, 0.5955], AUC[0.8413, 0.8446], Time[0.2984, 0.4124]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5159, 0.5974], AUC[0.8408, 0.8446], Time[0.2969, 0.9887]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8035 0.5948  0.8452        127.22       460.08          6.78       590.95           44        24      54.55%
+       AMSCO   0.8036 0.5950  0.8453        143.24       510.88          6.65       590.95           52        35      67.31%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.3853], AUC[0.6104, 0.8330], Time[0.8600, 2.4183]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4401], AUC[0.6102, 0.8340], Time[0.8600, 2.5159]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7846 0.4295  0.8340        553.25       790.51          9.13       590.95           64        44      68.75%
+       AMSCO   0.7802 0.4043  0.8336        489.68       617.03          8.92       590.95           49        31      63.27%
+
+------------------------------------------------------------
+
+
+########## SEED 10 ##########
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: BREAST_CANCER (seed=10)
+=======================================================
+... Đang tải Breast Cancer (sklearn)
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9596, 0.9848], AUC[0.9894, 0.9962], Time[0.0245, 0.0271]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9596, 0.9848], AUC[0.9877, 0.9962], Time[0.0245, 0.0284]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9859 0.9889  0.9950         12.51        12.51          0.98       590.95           38        18      47.37%
+       AMSCO   0.9807 0.9848  0.9945          6.82         6.82          0.78       590.95           17         8      47.06%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9569, 0.9652], AUC[0.9889, 0.9913], Time[0.6955, 1.9560]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.9569, 0.9694], AUC[0.9889, 0.9933], Time[0.6236, 2.0943]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.9543 0.9641  0.9906        315.38       340.19          1.53       590.95           30        10      33.33%
+       AMSCO   0.9543 0.9640  0.9909        229.17       247.95          1.44       590.95           19         8      42.11%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: ADULT (seed=10)
+=======================================================
+... Đang tải Adult Income
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6069, 0.6614], AUC[0.8965, 0.9066], Time[0.2239, 0.4560]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6069, 0.6614], AUC[0.8965, 0.9066], Time[0.2182, 0.5836]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8523 0.6585  0.9067         64.14        64.12         30.11       590.95           21         1       4.76%
+       AMSCO   0.8523 0.6592  0.9067         56.81        56.80         30.18       590.95           17         8      47.06%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.6365, 0.6847], AUC[0.9096, 0.9180], Time[2.1197, 8.7722]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4935, 0.6860], AUC[0.8976, 0.9186], Time[0.9901, 8.7722]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8656 0.6854  0.9182        974.34      5405.40         41.49       592.13           45        25      55.56%
+       AMSCO   0.8654 0.6814  0.9179       1221.21      6679.04         41.67       592.13           54        35      64.81%
+
+------------------------------------------------------------
+
+
+=======================================================
+ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: TELCO (seed=10)
+=======================================================
+... Đang tải Telco Customer Churn
+
+------------------------------------------------------------
+Đang tối ưu mô hình: LOGISTIC_REGRESSION
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.5756, 0.5961], AUC[0.8420, 0.8445], Time[0.3014, 0.4271]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.4709, 0.5974], AUC[0.8399, 0.8446], Time[0.2935, 0.4271]
+
+============================================================
+KẾT QUẢ CHO LOGISTIC_REGRESSION (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.8031 0.5945  0.8443         96.53       343.76          6.76       592.13           32        12      37.50%
+       AMSCO   0.8021 0.5919  0.8443         60.03       207.78          6.71       592.13           17         4      23.53%
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+Đang tối ưu mô hình: RANDOM_FOREST
+------------------------------------------------------------
+  [Multi-Objective] Sử dụng f(θ) = 0.4·F1 + 0.4·ROC-AUC - 0.2·time
+  [Evaluation] StratifiedKFold (5-fold), Primary metric: accuracy
+
+Thực thi: Optuna (TPE)...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.3720], AUC[0.7065, 0.8329], Time[0.9866, 2.4401]
+
+Thực thi: AMSCO...
+  [Warm-up] Đang chạy 10 trials để tính bounds...
+  [Warm-up] Bounds computed: F1[0.0000, 0.4401], AUC[0.6102, 0.8340], Time[0.8140, 2.4679]
+
+============================================================
+KẾT QUẢ CHO RANDOM_FOREST (Primary metric: accuracy)
+============================================================
+
+   Optimizer Accuracy     F1 ROC AUC Wall Time (s) CPU Time (s) Peak Mem (MB) RSS Mem (MB) Total Trials Iter→Best Conv. Ratio
+Optuna (TPE)   0.7826 0.4300  0.8341        559.66       798.47          9.13       592.13           64        44      68.75%
+       AMSCO   0.7785 0.3903  0.8329        280.41       350.33          8.64       592.13           19         6      31.58%
+
+------------------------------------------------------------
+
+
+
+============================================================
+                    KẾT QUẢ THỬ NGHIỆM TỔNG QUÁT                    
+============================================================
+
+
+KẾT QUẢ LẶP THEO SEED - OPTUNA (TPE):
+ Seed       Dataset               Model Primary Score F1-score ROC AUC Exec Time (s)
+    1         adult logistic_regression        0.7194   0.6612  0.9064        104.63
+    2         adult logistic_regression        0.7659   0.6607  0.9065        107.72
+    3         adult logistic_regression        0.7286   0.6602  0.9067        140.49
+    4         adult logistic_regression        0.7398   0.6606  0.9067        157.33
+    5         adult logistic_regression        0.7368   0.6608  0.9067        116.05
+    6         adult logistic_regression        0.7305   0.6607  0.9066        112.75
+    7         adult logistic_regression        0.7442   0.6606  0.9066        101.10
+    8         adult logistic_regression        0.7409   0.6607  0.9068        174.11
+    9         adult logistic_regression        0.7247   0.6595  0.9066        115.07
+   10         adult logistic_regression        0.6990   0.6585  0.9067         64.14
+    1         adult       random_forest        0.7430   0.6835  0.9176       1097.51
+    2         adult       random_forest        0.8529   0.6851  0.9177       1075.18
+    3         adult       random_forest        0.8853   0.6831  0.9181        799.86
+    4         adult       random_forest        0.7417   0.6833  0.9175       1012.27
+    5         adult       random_forest        0.8175   0.6803  0.9173       1334.47
+    6         adult       random_forest        0.7363   0.6853  0.9175       1150.82
+    7         adult       random_forest        0.7523   0.6774  0.9165        745.97
+    8         adult       random_forest        0.7216   0.6765  0.9163        754.76
+    9         adult       random_forest        0.7737   0.6781  0.9162        579.97
+   10         adult       random_forest        0.8074   0.6854  0.9182        974.34
+    1 breast_cancer logistic_regression        0.7487   0.9875  0.9957         16.05
+    2 breast_cancer logistic_regression        0.6999   0.9835  0.9958          7.97
+    3 breast_cancer logistic_regression        0.8554   0.9834  0.9953         13.65
+    4 breast_cancer logistic_regression        0.7247   0.9861  0.9959          7.96
+    5 breast_cancer logistic_regression        0.8598   0.9848  0.9952         16.08
+    6 breast_cancer logistic_regression        0.7102   0.9847  0.9950         10.48
+    7 breast_cancer logistic_regression        0.7489   0.9848  0.9945         19.23
+    8 breast_cancer logistic_regression        0.7963   0.9834  0.9948         16.28
+    9 breast_cancer logistic_regression        0.7366   0.9847  0.9953          8.07
+   10 breast_cancer logistic_regression        0.7355   0.9889  0.9950         12.51
+    1 breast_cancer       random_forest        1.1386   0.9693  0.9916        659.54
+    2 breast_cancer       random_forest        1.2277   0.9614  0.9909        713.28
+    3 breast_cancer       random_forest        1.0514   0.9666  0.9896        717.93
+    4 breast_cancer       random_forest        0.8239   0.9692  0.9913        308.45
+    5 breast_cancer       random_forest        1.2554   0.9710  0.9899        305.07
+    6 breast_cancer       random_forest        1.0212   0.9735  0.9893        617.15
+    7 breast_cancer       random_forest        0.9828   0.9677  0.9889        649.31
+    8 breast_cancer       random_forest        0.8481   0.9666  0.9895        635.77
+    9 breast_cancer       random_forest        0.9871   0.9763  0.9930        631.51
+   10 breast_cancer       random_forest        1.1269   0.9641  0.9906        315.38
+    1         telco logistic_regression        0.6905   0.5875  0.8437        128.46
+    2         telco logistic_regression        0.7016   0.5917  0.8438        129.00
+    3         telco logistic_regression        0.6883   0.5926  0.8448         96.06
+    4         telco logistic_regression        0.6985   0.5951  0.8447        101.64
+    5         telco logistic_regression        0.7357   0.5950  0.8453        228.96
+    6         telco logistic_regression        0.7215   0.5922  0.8441         98.81
+    7         telco logistic_regression        0.6978   0.5965  0.8445         98.52
+    8         telco logistic_regression        0.7810   0.5917  0.8436        128.01
+    9         telco logistic_regression        0.6966   0.5948  0.8452        127.22
+   10         telco logistic_regression        0.6967   0.5945  0.8443         96.53
+    1         telco       random_forest        0.6180   0.2785  0.8309        394.11
+    2         telco       random_forest        0.8547   0.4450  0.8338        421.94
+    3         telco       random_forest        0.6202   0.4182  0.8341        714.76
+    4         telco       random_forest        0.5946   0.2594  0.8300        691.53
+    5         telco       random_forest        0.6383   0.3094  0.8298        397.60
+    6         telco       random_forest        0.9540   0.4387  0.8320        422.07
+    7         telco       random_forest        0.6899   0.4168  0.8339        884.95
+    8         telco       random_forest        0.6499   0.3991  0.8312        433.94
+    9         telco       random_forest        0.8422   0.4295  0.8340        553.25
+   10         telco       random_forest        0.8807   0.4300  0.8341        559.66
+
+Thống kê mô tả (OPTUNA (TPE)):
+       Metric   Mean    Std  n
+Primary Score 0.7949 0.1430 60
+     F1-score 0.7119 0.2145 60
+      ROC AUC 0.9144 0.0638 60
+Exec Time (s) 385.12 358.06 60
+
+KẾT QUẢ LẶP THEO SEED - AMSCO:
+ Seed       Dataset               Model Primary Score F1-score ROC AUC Exec Time (s)
+    1         adult logistic_regression        0.7239   0.6608  0.9064         67.53
+    2         adult logistic_regression        0.7333   0.6591  0.9065         63.92
+    3         adult logistic_regression        0.7217   0.6595  0.9066         67.57
+    4         adult logistic_regression        0.7338   0.6604  0.9066         70.49
+    5         adult logistic_regression        0.7294   0.6609  0.9067         63.24
+    6         adult logistic_regression        0.7245   0.6591  0.9066         68.54
+    7         adult logistic_regression        0.7214   0.6610  0.9066         65.30
+    8         adult logistic_regression        0.7299   0.6606  0.9068         68.55
+    9         adult logistic_regression        0.7308   0.6589  0.9066         63.19
+   10         adult logistic_regression        0.7262   0.6592  0.9067         56.81
+    1         adult       random_forest        0.7264   0.6792  0.9171        648.41
+    2         adult       random_forest        0.7327   0.6764  0.9173        984.25
+    3         adult       random_forest        0.7280   0.6832  0.9178       1187.82
+    4         adult       random_forest        0.7378   0.6855  0.9175       1383.57
+    5         adult       random_forest        0.7043   0.6805  0.9161        658.05
+    6         adult       random_forest        0.7448   0.6828  0.9178        780.75
+    7         adult       random_forest        0.7475   0.6780  0.9178       1218.74
+    8         adult       random_forest        0.7494   0.6801  0.9180        998.90
+    9         adult       random_forest        0.7440   0.6789  0.9173       1109.37
+   10         adult       random_forest        0.7378   0.6814  0.9179       1221.21
+    1 breast_cancer logistic_regression        0.7542   0.9875  0.9957          6.65
+    2 breast_cancer logistic_regression        0.6912   0.9835  0.9958          6.86
+    3 breast_cancer logistic_regression        0.7614   0.9834  0.9953          7.04
+    4 breast_cancer logistic_regression        0.7204   0.9861  0.9963          7.25
+    5 breast_cancer logistic_regression        0.7446   0.9862  0.9944          8.37
+    6 breast_cancer logistic_regression        0.7530   0.9845  0.9953          9.99
+    7 breast_cancer logistic_regression        0.7641   0.9848  0.9946          7.29
+    8 breast_cancer logistic_regression        0.7393   0.9848  0.9946         16.19
+    9 breast_cancer logistic_regression        0.7195   0.9861  0.9953          6.81
+   10 breast_cancer logistic_regression        0.7666   0.9848  0.9945          6.82
+    1 breast_cancer       random_forest        0.6130   0.9651  0.9909        280.79
+    2 breast_cancer       random_forest        0.6368   0.9625  0.9917        365.22
+    3 breast_cancer       random_forest        0.6471   0.9652  0.9879        298.77
+    4 breast_cancer       random_forest        0.5702   0.9650  0.9927        392.22
+    5 breast_cancer       random_forest        0.6334   0.9641  0.9890        280.80
+    6 breast_cancer       random_forest        0.5425   0.9707  0.9908        381.10
+    7 breast_cancer       random_forest        0.6628   0.9693  0.9897        446.13
+    8 breast_cancer       random_forest        0.5170   0.9622  0.9887        178.09
+    9 breast_cancer       random_forest        0.6343   0.9708  0.9918        362.30
+   10 breast_cancer       random_forest        0.5167   0.9640  0.9909        229.17
+    1         telco logistic_regression        0.7551   0.5894  0.8438         58.73
+    2         telco logistic_regression        0.7021   0.5904  0.8438        103.66
+    3         telco logistic_regression        0.6833   0.5908  0.8447         77.61
+    4         telco logistic_regression        0.7682   0.5950  0.8447         66.59
+    5         telco logistic_regression        0.7648   0.5956  0.8453         66.31
+    6         telco logistic_regression        0.6901   0.5906  0.8440         61.01
+    7         telco logistic_regression        0.6469   0.5939  0.8437         66.66
+    8         telco logistic_regression        0.7494   0.5886  0.8436         64.81
+    9         telco logistic_regression        0.7696   0.5950  0.8453        143.24
+   10         telco logistic_regression        0.6950   0.5919  0.8443         60.03
+    1         telco       random_forest        0.7889   0.4355  0.8328        409.98
+    2         telco       random_forest        0.6311   0.3309  0.8292        409.60
+    3         telco       random_forest        0.7810   0.4249  0.8328        555.54
+    4         telco       random_forest        0.3448   0.0000  0.8006        330.07
+    5         telco       random_forest        0.6532   0.3801  0.8332        559.82
+    6         telco       random_forest        0.3734   0.0000  0.8085        385.20
+    7         telco       random_forest        0.8130   0.4416  0.8329        495.18
+    8         telco       random_forest        0.5639   0.3887  0.8324        449.19
+    9         telco       random_forest        0.7657   0.4043  0.8336        489.68
+   10         telco       random_forest        0.6657   0.3903  0.8329        280.41
+
+Thống kê mô tả (AMSCO):
+       Metric   Mean    Std  n
+Primary Score 0.6937 0.0910 60
+     F1-score 0.7006 0.2389 60
+      ROC AUC 0.9135 0.0652 60
+Exec Time (s) 321.29 367.13 60
+
+KIỂM ĐỊNH THỐNG KÊ GIỮA OPTUNA (TPE) VÀ AMSCO:
+       Metric           Test Statistic p-value #Pairs
+     F1-score  Paired t-test    1.2384  0.2205     60
+      ROC AUC  Paired t-test    1.4491  0.1526     60
+Exec Time (s) Mann-Whitney U 2127.0000  0.0866  60/60
+
+BẢNG TÓM TẮT (Dataset, Method, Mean Accuracy, Std Dev, Mean Time (s), Convergence Speed):
+------------------------------------------------------------
+      Dataset       Method Mean Accuracy Std Dev Mean Time (s) Convergence Speed
+        adult        AMSCO        0.8586  0.0062        542.31          0.001583
+        adult Optuna (TPE)        0.8586  0.0061        535.93          0.001602
+breast_cancer        AMSCO        0.9691  0.0128        164.89          0.005877
+breast_cancer Optuna (TPE)        0.9707  0.0115        284.08          0.003417
+        telco        AMSCO        0.7865  0.0209        256.67          0.003064
+        telco Optuna (TPE)        0.7902  0.0138        335.35          0.002356
+
+
+BẢNG HIỆU NĂNG TỐI ƯU HÓA (Time / Iterations / Resource):
+----------------------------------------------------------------------
+      Dataset       Method Mean Wall Time (s) Mean CPU Time (s) Mean Peak Mem (MB) Mean Total Trials Mean Iter→Best Mean Conv. Ratio
+        adult        AMSCO             542.31           2759.29              35.75              32.1           19.8           53.91%
+        adult Optuna (TPE)             535.93           2589.63              35.91              48.3           28.3           54.50%
+breast_cancer        AMSCO             164.89            177.57               1.17              31.0           17.6           50.81%
+breast_cancer Optuna (TPE)             284.08            306.13               1.44              51.5           31.4           51.12%
+        telco        AMSCO             256.67            419.58               7.69              31.1           16.2           46.51%
+        telco Optuna (TPE)             335.35            582.47               7.97              52.8           34.1           58.53%
+
+
+BẢNG SO SÁNH CV (Method, Without CV, With K-Fold (k=5), With Nested CV, Improvement (%)):
+------------------------------------------------------------
+      Method Without CV With K-Fold (k=5) With Nested CV Improvement (%)
+       AMSCO     0.8714            0.8714         0.8697           -0.01
+Optuna (TPE)     0.8730            0.8732         0.8639            0.02
+
+
+BẢNG ĐÁNH GIÁ CV (Evaluation Method, Accuracy, F1-Score, AUC-ROC, Time):
+------------------------------------------------------------
+              Evaluation Method Accuracy F1-Score AUC-ROC   Time
+   Simple Holdout (80-20 split)   0.8722   0.7032  0.9136   0.45
+          Standard K-Fold (k=5)   0.8723   0.7062  0.9139   8.15
+   Nested CV (5-outer, 3-inner)   0.8668   0.6734  0.9129 251.80
+Improvement (Nested vs Holdout)   -0.62%   -4.24%  -0.09%      -
+
+
+BẢNG SO SÁNH THỐNG KÊ (TÀI NGUYÊN TỐI ƯU HÓA – AMSCO vs BASELINES):
+--------------------------------------------------------------------------------
+           Metric            Comparison Mean AMSCO Mean Baseline Δ (Baseline-AMSCO) U-statistic p-value Significant (α=0.05) Cohen's d Effect Size    Preferred  Sample Size
+    Wall Time (s) AMSCO vs Optuna (TPE)    321.290       385.121             63.831    1473.000  0.0866                   No    -0.293       Small        AMSCO           60
+     CPU Time (s) AMSCO vs Optuna (TPE)   1118.813      1159.412             40.598    1496.000  0.1112                   No    -0.042  Negligible        AMSCO           60
+     Total Trials AMSCO vs Optuna (TPE)     31.400        50.833             19.433     802.500  0.0000                  Yes    -0.910       Large        AMSCO           60
+        Iter→Best AMSCO vs Optuna (TPE)     17.883        31.283             13.400    1037.500  0.0001                  Yes    -0.607      Medium        AMSCO           60
+Convergence Ratio AMSCO vs Optuna (TPE)      0.504         0.547              0.043    1477.000  0.0905                   No    -0.174  Negligible        AMSCO           60
+ Peak Memory (MB) AMSCO vs Optuna (TPE)     14.871        15.105              0.235    1580.000  0.2493                   No    -0.852       Large        AMSCO           60
+  RSS Memory (MB) AMSCO vs Optuna (TPE)    529.678       527.940             -1.739    1837.000  0.8473                   No     0.358       Small Optuna (TPE)           60
+
+
+
+BẢNG TỔNG HỢP THEO OPTIMIZER (HÀNG = METRIC):
+------------------------------------------------------------
+               Metric  AMSCO Optuna (TPE) Hyperopt (TPE) Random Search
+      Accuracy (CV=5) 0.8714       0.8732            nan           nan
+     Precision (CV=5) 0.7813       0.8064            nan           nan
+        Recall (CV=5) 0.6551       0.6637            nan           nan
+ F1-score (CV metric) 0.7006       0.7119            nan           nan
+  AUC-ROC (CV metric) 0.9135       0.9144            nan           nan
+  Balanced Acc (CV=5) 0.7973       0.8013            nan           nan
+Optimization Time (s) 321.29       385.12            nan           nan
+
+
+[INFO] Đã lưu optuna_seed_results.csv
