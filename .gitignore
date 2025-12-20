@@ -48,7 +48,9 @@ Thumbs.db
 
 # Secrets
 .env
-kaggle/kaggle.json
 
-# Large files
+# Logs
+*.log
+
+# Large datasets
 datasets/creditcard.csv
