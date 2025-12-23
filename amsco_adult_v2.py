@@ -1988,6 +1988,33 @@ if __name__ == "__main__":
         TOTAL_TRIALS,
         math.ceil(baseline_fit_budget / nested_fit_per_trial)
     )
+
+    # Chuẩn bị tập train/test độc lập cho từng dataset (test set không tham gia Nested CV)
+    DATA_SPLITS = {}
+    try:
+        for dataset_name in DATASETS:
+            try:
+                X_full, y_full, preprocessor_full, metric_full, sampler_full = get_data(dataset_name, quiet=True)
+                X_train_split, X_test_split, y_train_split, y_test_split = train_test_split(
+                    X_full,
+                    y_full,
+                    test_size=TEST_SIZE,
+                    stratify=y_full,
+                    random_state=42
+                )
+                DATA_SPLITS[dataset_name] = {
+                    'X_train': X_train_split,
+                    'y_train': y_train_split,
+                    'X_test': X_test_split,
+                    'y_test': y_test_split,
+                    'preprocessor': preprocessor_full,
+                    'metric': metric_full,
+                    'sampler': sampler_full
+                }
+            except Exception as e:
+                print(f"[WARN] Không thể chuẩn bị split cho {dataset_name}: {e}")
+    except Exception as e:
+        print(f"[WARN] Lỗi khi chuẩn bị các tập train/test độc lập: {e}")
     
     # === CÂN BẰNG PATIENCE ===
     # AMSCO: 2 slices × 10 trials/slice = 20 trials effective
@@ -2096,7 +2123,18 @@ if __name__ == "__main__":
             print(f"ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: {dataset_name.upper()} (seed={seed})")
             print(f"=======================================================")
             try:
-                X, y, preprocessor, _metric_default, sampler = get_data(dataset_name)
+                data_split = DATA_SPLITS.get(dataset_name)
+                if not data_split:
+                    raise ValueError(f"Không tìm thấy split cho dataset {dataset_name}")
+                X = data_split['X_train']
+                y = data_split['y_train']
+                X_true_test = data_split['X_test']
+                y_true_test = data_split['y_test']
+                preprocessor_template = data_split['preprocessor']
+                sampler_template = data_split.get('sampler')
+                preprocessor = clone(preprocessor_template)
+                sampler = clone(sampler_template) if sampler_template is not None else None
+                _metric_default = data_split.get('metric', METRICS[0])
             except Exception as e:
                 print(f"  [WARNING] Bỏ qua dataset {dataset_name}: {e}")
                 continue
@@ -2221,6 +2259,7 @@ if __name__ == "__main__":
                     metric_scores = {m: np.nan for m in METRICS}
                     acc_cv5 = prec_cv5 = rec_cv5 = bal_cv5 = acc_val = np.nan
                     acc_holdout = f1_holdout = auc_holdout = np.nan
+                    acc_true_test = f1_true_test = auc_true_test = np.nan
                     time_cv5_eval = time_holdout_eval = np.nan
                     try:
                         model = _build_model_for_eval(model_name)
@@ -2338,12 +2377,46 @@ if __name__ == "__main__":
                                     val_model = clone(pipeline)
                                     val_model.fit(X_tr_val, y_tr_val)
                                     acc_val = val_model.score(X_te_val, y_te_val)
-
                                 except Exception as e:
                                     print(f"  [WARN] Không tính được metric CV=5/Val (holdout mode) cho {optimizer_name}: {e}")
                             acc_holdout = metric_scores.get('accuracy', np.nan)
                             f1_holdout = metric_scores.get('f1', np.nan)
                             auc_holdout = metric_scores.get('roc_auc', np.nan)
+
+                        # Đánh giá trên tập test độc lập (không tham gia nested CV)
+                        try:
+                            model_test = _build_model_for_eval(model_name)
+                            if sampler_template is not None:
+                                pipeline_test = ImbPipeline(steps=[
+                                    ('preprocessor', clone(preprocessor_template)),
+                                    ('sampler', clone(sampler_template)),
+                                    ('classifier', model_test)
+                                ])
+                            else:
+                                pipeline_test = Pipeline(steps=[
+                                    ('preprocessor', clone(preprocessor_template)),
+                                    ('classifier', model_test)
+                                ])
+                            pipeline_test.set_params(**params)
+                            pipeline_test.fit(X, y)
+                            y_pred_test = pipeline_test.predict(X_true_test)
+                            acc_true_test = float(accuracy_score(y_true_test, y_pred_test))
+                            try:
+                                f1_true_test = float(f1_score(y_true_test, y_pred_test, average='binary'))
+                            except Exception:
+                                f1_true_test = np.nan
+                            try:
+                                if hasattr(pipeline_test.named_steps['classifier'], 'predict_proba'):
+                                    y_prob_test = pipeline_test.predict_proba(X_true_test)[:, 1]
+                                elif hasattr(pipeline_test.named_steps['classifier'], 'decision_function'):
+                                    y_prob_test = pipeline_test.decision_function(X_true_test)
+                                else:
+                                    y_prob_test = None
+                                auc_true_test = float(roc_auc_score(y_true_test, y_prob_test)) if y_prob_test is not None else np.nan
+                            except Exception:
+                                auc_true_test = np.nan
+                        except Exception as e:
+                            print(f"  [WARN] Không tính được metric test độc lập cho {optimizer_name}: {e}")
                     except Exception as e:
                         print(f"  [WARN] Lỗi khi tính metrics bổ sung cho {optimizer_name}: {e}")
 
@@ -2382,6 +2455,9 @@ if __name__ == "__main__":
                         'f1': metric_scores.get('f1', np.nan),
                         'roc_auc': metric_scores.get('roc_auc', np.nan),
                         'acc_holdout': acc_holdout,
+                        'acc_true_test': acc_true_test,
+                        'f1_true_test': f1_true_test,
+                        'auc_true_test': auc_true_test,
                         'f1_holdout': f1_holdout,
                         'auc_holdout': auc_holdout,
                         'acc_val': acc_val,
@@ -2779,7 +2855,14 @@ if __name__ == "__main__":
                 methods = sorted(results_df['optimizer'].unique())
                 for dataset_name in DATASETS:
                     try:
-                        Xn, yn, prep_n, _, sampler_n = get_data(dataset_name, quiet=True)
+                        split_info = DATA_SPLITS.get(dataset_name)
+                        if not split_info:
+                            continue
+                        Xn = split_info['X_train']
+                        yn = split_info['y_train']
+                        prep_n = clone(split_info['preprocessor'])
+                        sampler_base_n = split_info.get('sampler')
+                        sampler_n = clone(sampler_base_n) if sampler_base_n is not None else None
                     except Exception:
                         continue
                         
@@ -2818,7 +2901,12 @@ if __name__ == "__main__":
 
         # Tính ground truth theo từng dataset dựa trên Nested CV outer-fold (nếu khả dụng)
         ground_truth_by_dataset = {}
-        if nested_cache:
+        if 'acc_true_test' in results_df.columns:
+            for dataset_name in DATASETS:
+                vals_test = results_df[results_df['dataset'] == dataset_name]['acc_true_test'].dropna().values
+                if len(vals_test) > 0:
+                    ground_truth_by_dataset[dataset_name] = float(np.mean(vals_test))
+        if not ground_truth_by_dataset and nested_cache:
             for dataset_name, method_dict in nested_cache.items():
                 nested_vals = []
                 for method_val in method_dict.values():
@@ -2850,7 +2938,18 @@ if __name__ == "__main__":
                 dataset_estimates = {}
 
                 if metric_key == 'nested_ground_truth':
-                    dataset_estimates = ground_truth_by_dataset.copy()
+                    if nested_cache:
+                        for dataset_name, method_dict in nested_cache.items():
+                            nested_vals = []
+                            for method_val in method_dict.values():
+                                if isinstance(method_val, dict):
+                                    acc_val_nested = method_val.get('accuracy', np.nan)
+                                else:
+                                    acc_val_nested = method_val
+                                if isinstance(acc_val_nested, (int, float, np.floating)) and not np.isnan(acc_val_nested):
+                                    nested_vals.append(float(acc_val_nested))
+                            if nested_vals:
+                                dataset_estimates[dataset_name] = float(np.mean(nested_vals))
                 else:
                     if metric_key not in results_df.columns:
                         continue
@@ -3544,7 +3643,3 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f'[WARN] Không thể lưu results/convergence_history.csv: {e}')
 # In[ ]:
-
-
-
-
