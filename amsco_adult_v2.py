@@ -1989,7 +1989,7 @@ if __name__ == "__main__":
         math.ceil(baseline_fit_budget / nested_fit_per_trial)
     )
 
-    # Chuẩn bị tập train/test độc lập cho từng dataset (test set không tham gia Nested CV)
+    # Prepare independent train/test split per dataset (test set never used in Nested CV)
     DATA_SPLITS = {}
     try:
         for dataset_name in DATASETS:
@@ -2012,9 +2012,9 @@ if __name__ == "__main__":
                     'sampler': sampler_full
                 }
             except Exception as e:
-                print(f"[WARN] Không thể chuẩn bị split cho {dataset_name}: {e}")
+                print(f"[WARN] Cannot prepare split for {dataset_name}: {e}")
     except Exception as e:
-        print(f"[WARN] Lỗi khi chuẩn bị các tập train/test độc lập: {e}")
+        print(f"[WARN] Error preparing independent train/test splits: {e}")
     
     # === CÂN BẰNG PATIENCE ===
     # AMSCO: 2 slices × 10 trials/slice = 20 trials effective
@@ -2112,6 +2112,18 @@ if __name__ == "__main__":
             'best_auc': best_auc
         }
 
+    def _make_pipeline(preprocessor_base, sampler_base, model_obj):
+        if sampler_base is not None:
+            return ImbPipeline(steps=[
+                ('preprocessor', clone(preprocessor_base)),
+                ('sampler', clone(sampler_base)),
+                ('classifier', model_obj)
+            ])
+        return Pipeline(steps=[
+            ('preprocessor', clone(preprocessor_base)),
+            ('classifier', model_obj)
+        ])
+
     for seed in SEEDS:
         np.random.seed(seed)
         random.seed(seed)
@@ -2125,7 +2137,7 @@ if __name__ == "__main__":
             try:
                 data_split = DATA_SPLITS.get(dataset_name)
                 if not data_split:
-                    raise ValueError(f"Không tìm thấy split cho dataset {dataset_name}")
+                    raise ValueError(f"Split not found for dataset {dataset_name}")
                 X = data_split['X_train']
                 y = data_split['y_train']
                 X_true_test = data_split['X_test']
@@ -2263,10 +2275,7 @@ if __name__ == "__main__":
                     time_cv5_eval = time_holdout_eval = np.nan
                     try:
                         model = _build_model_for_eval(model_name)
-                        if sampler is not None:
-                            pipeline = ImbPipeline(steps=[('preprocessor', preprocessor), ('sampler', clone(sampler)), ('classifier', model)])
-                        else:
-                            pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('classifier', model)])
+                        pipeline = _make_pipeline(preprocessor, sampler, model)
                         pipeline.set_params(**params)
                         if USE_CROSS_VALIDATION:
                             cv = StratifiedKFold(n_splits=CV_FOLDS, shuffle=True, random_state=seed)
@@ -2306,7 +2315,7 @@ if __name__ == "__main__":
                                     bal_cv5 = cross_val_score(pipeline, X, y, cv=cv5, scoring='balanced_accuracy', n_jobs=-1).mean()
                                     time_cv5_eval = time.time() - _t0
                                 except Exception as e:
-                                    print(f"  [WARN] Không tính được metric CV=5 cho {optimizer_name}: {e}")
+                                    print(f"  [WARN] Could not compute CV=5 metrics for {optimizer_name}: {e}")
 
                             # Đánh giá holdout để phục vụ bảng tổng hợp Without CV
                             try:
@@ -2338,7 +2347,7 @@ if __name__ == "__main__":
                                 except Exception:
                                     auc_holdout = np.nan
                             except Exception as e:
-                                print(f"  [WARN] Không tính được metric holdout cho {optimizer_name}: {e}")
+                                print(f"  [WARN] Could not compute holdout metrics for {optimizer_name}: {e}")
                         else:
                             _t2 = time.time()
                             pipeline.fit(X_train, y_train)
@@ -2378,7 +2387,7 @@ if __name__ == "__main__":
                                     val_model.fit(X_tr_val, y_tr_val)
                                     acc_val = val_model.score(X_te_val, y_te_val)
                                 except Exception as e:
-                                    print(f"  [WARN] Không tính được metric CV=5/Val (holdout mode) cho {optimizer_name}: {e}")
+                                    print(f"  [WARN] Could not compute CV=5/Val (holdout mode) metrics for {optimizer_name}: {e}")
                             acc_holdout = metric_scores.get('accuracy', np.nan)
                             f1_holdout = metric_scores.get('f1', np.nan)
                             auc_holdout = metric_scores.get('roc_auc', np.nan)
@@ -2386,17 +2395,7 @@ if __name__ == "__main__":
                         # Đánh giá trên tập test độc lập (không tham gia nested CV)
                         try:
                             model_test = _build_model_for_eval(model_name)
-                            if sampler_template is not None:
-                                pipeline_test = ImbPipeline(steps=[
-                                    ('preprocessor', clone(preprocessor_template)),
-                                    ('sampler', clone(sampler_template)),
-                                    ('classifier', model_test)
-                                ])
-                            else:
-                                pipeline_test = Pipeline(steps=[
-                                    ('preprocessor', clone(preprocessor_template)),
-                                    ('classifier', model_test)
-                                ])
+                            pipeline_test = _make_pipeline(preprocessor_template, sampler_template, model_test)
                             pipeline_test.set_params(**params)
                             pipeline_test.fit(X, y)
                             y_pred_test = pipeline_test.predict(X_true_test)
@@ -2416,7 +2415,7 @@ if __name__ == "__main__":
                             except Exception:
                                 auc_true_test = np.nan
                         except Exception as e:
-                            print(f"  [WARN] Không tính được metric test độc lập cho {optimizer_name}: {e}")
+                            print(f"  [WARN] Could not compute independent test metrics for {optimizer_name}: {e}")
                     except Exception as e:
                         print(f"  [WARN] Lỗi khi tính metrics bổ sung cho {optimizer_name}: {e}")
 
