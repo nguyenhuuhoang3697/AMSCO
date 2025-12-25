@@ -2905,18 +2905,6 @@ if __name__ == "__main__":
                 vals_test = results_df[results_df['dataset'] == dataset_name]['acc_true_test'].dropna().values
                 if len(vals_test) > 0:
                     ground_truth_by_dataset[dataset_name] = float(np.mean(vals_test))
-        if not ground_truth_by_dataset and nested_cache:
-            for dataset_name, method_dict in nested_cache.items():
-                nested_vals = []
-                for method_val in method_dict.values():
-                    if isinstance(method_val, dict):
-                        acc_val_nested = method_val.get('accuracy', np.nan)
-                    else:
-                        acc_val_nested = method_val
-                    if isinstance(acc_val_nested, (int, float, np.floating)) and not np.isnan(acc_val_nested):
-                        nested_vals.append(float(acc_val_nested))
-                if nested_vals:
-                    ground_truth_by_dataset[dataset_name] = float(np.mean(nested_vals))
 
         # ============================================================
         # BẢNG 4.3: So sánh Bias và Variance trung bình trên 4 datasets
