@@ -77,7 +77,7 @@ MASTER_SEARCH_SPACES = {
     'lightgbm': {
         'classifier__n_estimators': ('int', 50, 200),
         'classifier__num_leaves': ('int', 20, 120),
-        'classifier__max_depth': ('int', 3, 12),
+        # 'classifier__max_depth': ('int', 3, 12), # Loại bỏ để tránh xung đột với num_leaves
         'classifier__learning_rate': ('float', 0.01, 0.3, 'log'),
         'classifier__subsample': ('float', 0.6, 1.0),
         'classifier__colsample_bytree': ('float', 0.6, 1.0)
@@ -240,6 +240,126 @@ def get_data(dataset_name, quiet=False):
 
     raise ValueError("Notebook này chỉ hỗ trợ dataset 'adult', 'breast_cancer', 'telco', hoặc 'credit'.")
 
+
+def prepare_data_with_holdout_test(dataset_name, test_size=0.2, random_state=42):
+    """
+    Tải dữ liệu và tách thành: 
+    - Train+Val set (80%): Dùng cho Nested CV và tối ưu hóa
+    - Test set (20%): Dùng làm ground truth, KHÔNG tham gia training
+    
+    Args:
+        dataset_name:  Tên dataset
+        test_size: Tỷ lệ test set (default:  0.2)
+        random_state: Seed để tái lập
+    
+    Returns:
+        tuple: (X_train_val, X_test, y_train_val, y_test, preprocessor, metric, sampler)
+    """
+    # Load full data
+    X_full, y_full, preprocessor, metric, sampler = get_data(dataset_name, quiet=True)
+    
+    # Split:  80% Train+Val, 20% Test (độc lập)
+    X_train_val, X_test, y_train_val, y_test = train_test_split(
+        X_full, y_full,
+        test_size=test_size,
+        stratify=y_full,
+        random_state=random_state
+    )
+    
+    print(f"  [Data Split] {dataset_name}:")
+    print(f"    Train+Val: {len(X_train_val)} samples ({(1-test_size)*100:.0f}%)")
+    print(f"    Test (held-out): {len(X_test)} samples ({test_size*100:.0f}%)")
+    print(f"    Class distribution (Test): {dict(pd.Series(y_test).value_counts())}")
+    
+    return X_train_val, X_test, y_train_val, y_test, preprocessor, metric, sampler
+
+def evaluate_on_holdout_test(best_params, model_name, preprocessor, 
+                              X_train, y_train, X_test, y_test, sampler=None):
+    """
+    Đánh giá mô hình trên test set độc lập (ground truth).
+    
+    Args:
+        best_params: Tham số tốt nhất từ optimizer
+        model_name: Tên mô hình
+        preprocessor: Preprocessor
+        X_train: Dữ liệu train (80%)
+        y_train: Label train
+        X_test:  Dữ liệu test độc lập (20%)
+        y_test: Label test
+        sampler:  SMOTE sampler (nếu có)
+    
+    Returns:
+        dict: {'accuracy', 'f1', 'roc_auc', 'precision', 'recall', 'balanced_accuracy'}
+    """
+    # Build model
+    if model_name == 'logistic_regression':
+        if sampler is None:
+            model = LogisticRegression(random_state=42, max_iter=2000, class_weight='balanced')
+        else:
+            model = LogisticRegression(random_state=42, max_iter=2000)
+    elif model_name == 'random_forest':
+        if sampler is None:
+            model = RandomForestClassifier(random_state=42, n_jobs=-1, class_weight='balanced_subsample')
+        else:
+            model = RandomForestClassifier(random_state=42, n_jobs=-1)
+    elif model_name == 'xgboost':
+        model = xgb.XGBClassifier(random_state=42, eval_metric='logloss', use_label_encoder=False)
+    elif model_name == 'lightgbm':
+        model = lgb.LGBMClassifier(random_state=42, verbosity=-1)
+    else:
+        raise ValueError(f"Model '{model_name}' not supported")
+    
+    # Build pipeline
+    if sampler is not None:
+        pipeline = ImbPipeline(steps=[
+            ('preprocessor', preprocessor),
+            ('sampler', clone(sampler)),
+            ('classifier', model)
+        ])
+    else:
+        pipeline = Pipeline(steps=[
+            ('preprocessor', preprocessor),
+            ('classifier', model)
+        ])
+    
+    # Set best params and train on full train set
+    pipeline.set_params(**best_params)
+    pipeline.fit(X_train, y_train)
+    
+    # Predict on held-out test set
+    y_pred = pipeline.predict(X_test)
+    
+    # Calculate metrics
+    results = {
+        'accuracy': float(accuracy_score(y_test, y_pred)),
+        'precision': float(precision_score(y_test, y_pred, average='binary', zero_division=0)),
+        'recall': float(recall_score(y_test, y_pred, average='binary', zero_division=0)),
+        'balanced_accuracy': float(balanced_accuracy_score(y_test, y_pred))
+    }
+    
+    # F1-Score
+    try:
+        results['f1'] = float(f1_score(y_test, y_pred, average='binary'))
+    except Exception: 
+        results['f1'] = np.nan
+    
+    # ROC-AUC
+    try:
+        if hasattr(pipeline. named_steps['classifier'], 'predict_proba'):
+            y_proba = pipeline.predict_proba(X_test)[: , 1]
+        elif hasattr(pipeline.named_steps['classifier'], 'decision_function'):
+            y_proba = pipeline.decision_function(X_test)
+        else:
+            y_proba = None
+        
+        if y_proba is not None:
+            results['roc_auc'] = float(roc_auc_score(y_test, y_proba))
+        else:
+            results['roc_auc'] = np.nan
+    except Exception:
+        results['roc_auc'] = np.nan
+    
+    return results
 
 # In[4]:
 
@@ -594,6 +714,8 @@ def create_objective(
                         trial.report(fold_score, step=fold_idx)
                         if trial.should_prune():
                             raise optuna.exceptions.TrialPruned()
+                    except optuna.exceptions.TrialPruned:
+                        raise
                     except Exception:
                         # Nếu trial không hỗ trợ hoặc Optuna không sẵn có
                         pass
@@ -1564,39 +1686,82 @@ def run_random_search(objective, search_space, n_trials, normalizer=None):
     }
     return study.best_trial.value, study.best_params, diagnostics
 
-def run_optuna_tpe(objective, search_space, n_trials, early_stopping_rounds=20, tolerance=1e-4, normalizer=None):
-    """Chạy Optuna TPE với MedianPruner và cơ chế dừng sớm tùy chọn.
-
-    Ghi chú:
-    - Sử dụng MedianPruner để dừng sớm dựa trên các báo cáo trung gian.
-    - Nếu `objective` có thuộc tính `_stepwise(trial, params)`, hàm này sẽ được dùng
-      để báo cáo theo từng fold, giúp pruner hoạt động hiệu quả.
-    - `early_stopping_rounds` và `tolerance` điều khiển việc dừng tối ưu hóa khi không
-      còn cải thiện đáng kể (theo tolerance) sau một số vòng liên tiếp.
-    - `normalizer`: Nếu được cung cấp, sẽ chạy warm-up trước để tính bounds.
+def run_optuna_tpe(objective, search_space, n_trials, early_stopping_rounds=15, tolerance=1e-3, normalizer=None):
     """
-    # Warm-up nếu dùng multi-objective
-    if normalizer is not None:
-        warmup_normalizer(objective, search_space, n_warmup_trials=min(10, n_trials // 10))
-        normalizer.compute_bounds()
-        print(f"  [Warm-up] Bounds computed: F1[{normalizer.f1_min:.4f}, {normalizer.f1_max:.4f}], "
-              f"AUC[{normalizer.auc_min:.4f}, {normalizer.auc_max:.4f}], "
-              f"Time[{normalizer.time_min:.4f}, {normalizer.time_max:.4f}]")
+    Chạy Optuna TPE với MedianPruner và cơ chế dừng sớm tối ưu.
     
-    # Sampler TPE cơ bản, có seed để tái lập.
-    sampler = optuna.samplers.TPESampler(seed=42)
-    # MedianPruner: warmup một vài trial đầu trước khi bắt đầu prune.
-    pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=0)
-    study = optuna.create_study(direction='maximize', sampler=sampler, pruner=pruner)
-
-    tolerance = 0.0 if tolerance is None else max(float(tolerance), 0.0)
+    Cải tiến: 
+    - Multivariate TPE sampler để tối ưu hóa hiệu quả
+    - MedianPruner với warmup steps
+    - Early stopping callback cải tiến với logging
+    - Hỗ trợ stepwise reporting cho pruning
+    
+    Args:
+        objective:  Hàm mục tiêu
+        search_space: Không gian tìm kiếm
+        n_trials: Số trials tối đa
+        early_stopping_rounds: Số trials không cải thiện trước khi dừng (default: 15)
+        tolerance: Ngưỡng cải thiện tối thiểu (default: 1e-3)
+        normalizer:  MultiObjectiveNormalizer (optional)
+    
+    Returns:
+        tuple: (best_score, best_params, diagnostics)
+    """
+    
+    # === WARM-UP CHO MULTI-OBJECTIVE ===
+    if normalizer is not None:
+        warmup_trials = min(10, max(5, n_trials // 10))
+        print(f"  [Warm-up] Running {warmup_trials} trials to compute bounds...")
+        warmup_normalizer(objective, search_space, n_warmup_trials=warmup_trials)
+        normalizer.compute_bounds()
+        print(f"  [Warm-up] Bounds:  F1[{normalizer.f1_min:.4f}, {normalizer.f1_max:.4f}], "
+              f"AUC[{normalizer.auc_min:.4f}, {normalizer.auc_max:.4f}], "
+              f"Time[{normalizer.time_min:.4f}s, {normalizer.time_max:.4f}s]")
+    
+    # === SAMPLER:  TPE với Multivariate ===
+    try:
+        sampler = optuna.samplers.TPESampler(
+            seed=42,
+            multivariate=True,  # Tối ưu hóa nhiều tham số cùng lúc
+            group=True,  # Nhóm các tham số liên quan
+            constant_liar=True,  # Xử lý parallel trials
+            n_startup_trials=min(10, n_trials // 10)  # Khám phá ban đầu
+        )
+        # print(f"  [Optuna] Using Multivariate TPE sampler")
+    except TypeError:
+        # Fallback cho phiên bản Optuna cũ
+        sampler = optuna.samplers.TPESampler(seed=42)
+        # print(f"  [Optuna] Using Standard TPE sampler (multivariate not supported)")
+    
+    # === PRUNER: MedianPruner với warmup ===
+    pruner = optuna.pruners.MedianPruner(
+        n_startup_trials=5,  # Không prune 5 trials đầu
+        n_warmup_steps=1,    # Chờ ít nhất 1 step trước khi prune
+        interval_steps=1     # Kiểm tra sau mỗi step
+    )
+    
+    study = optuna.create_study(
+        direction='maximize',
+        sampler=sampler,
+        pruner=pruner,
+        study_name=f"optuna_tpe_{int(time.time())}"
+    )
+    
+    # === EARLY STOPPING STATE ===
+    tolerance = max(float(tolerance or 0.0), 0.0)
     early_stop_state = {
-        'best_value': None,
+        'best_value': -float('inf'),
         'no_improve_rounds': 0,
-        'stopped': False
+        'stopped':  False,
+        'best_trial_number': -1
     }
-
+    
+    # === OBJECTIVE FUNCTION ===
     def optuna_objective(trial):
+        """Wrapper objective với stepwise reporting."""
+        trial_start = time.perf_counter()
+        
+        # Suggest parameters
         params = {}
         for name, details in search_space.items():
             p_type = details[0]
@@ -1610,93 +1775,120 @@ def run_optuna_tpe(objective, search_space, n_trials, early_stopping_rounds=20, 
             elif p_type == 'categorical':
                 choices = details[1]
                 params[name] = trial.suggest_categorical(name, choices)
-
-        # Dùng stepwise nếu có để pruner có dữ liệu trung gian theo từng fold
+        
+        # Evaluate với stepwise reporting (nếu có)
         if hasattr(objective, "_stepwise"):
             try:
                 score = objective._stepwise(trial, params)
             except optuna.exceptions.TrialPruned:
-                # Cho phép Optuna ghi nhận trial bị prune
+                # Trial bị pruned - đây là hành vi mong muốn
                 raise
         else:
-            # Fallback: đánh giá 1 lần, vẫn report 1 bước để pruner có dữ liệu
+            # Fallback:  đánh giá thông thường
             score = objective(params)
-
-            # Nếu objective không tự ghi trace (không dùng _stepwise),
-            # ta bổ sung một bản ghi tối giản để phục vụ vẽ hội tụ theo thời gian.
-            trace_meta = getattr(objective, "_trace_meta", None)
-            if trace_meta is not None and trace_meta.get("enabled"):
-                trial_wall = time.perf_counter() - trial_wall_start
-                buf = trace_meta.get("buffer") if isinstance(trace_meta, dict) else None
-                if isinstance(buf, list):
-                    buf.append({
-                        'f1': None,
-                        'roc_auc': None,
-                        'avg_fold_time': None,
-                        'primary': float(score) if isinstance(score, (int, float, np.floating)) else None,
-                        'composite': float(score) if isinstance(score, (int, float, np.floating)) else None,
-                        'trial_wall_time': float(trial_wall)
-                    })
-
-        try:
-            trial.report(float(score), step=0)
-        except Exception:
-            pass
+            # Report 1 step để pruner có dữ liệu (dù không hiệu quả bằng stepwise)
+            try:
+                trial.report(float(score), step=0)
+            except Exception:
+                pass
+        
+        trial_time = time.perf_counter() - trial_start
+        
+        # Lưu metadata
+        trial.set_user_attr("execution_time", trial_time)
+        
         return score
-
+    
+    # === EARLY STOPPING CALLBACK ===
     def _early_stop_callback(study_ref, trial):
+        """
+        Dừng tối ưu hóa khi không cải thiện sau `early_stopping_rounds` trials.
+        
+        Cải tiến:
+        - Chỉ kiểm tra completed trials
+        - Logging chi tiết
+        - So sánh với tolerance
+        """
         if not early_stopping_rounds or early_stopping_rounds <= 0:
             return
+        
+        # Chỉ xử lý completed trials
         if trial.state != optuna.trial.TrialState.COMPLETE:
             return
+        
         value = trial.value
         if not isinstance(value, (int, float)) or math.isnan(value):
             return
-
-        best_val = early_stop_state['best_value']
-        if best_val is None or (value - best_val) > tolerance:
+        
+        # Kiểm tra cải thiện
+        improvement = value - early_stop_state['best_value']
+        
+        if improvement > tolerance:
+            # Có cải thiện đáng kể
             early_stop_state['best_value'] = value
             early_stop_state['no_improve_rounds'] = 0
+            early_stop_state['best_trial_number'] = trial. number
+            # print(f"  [Optuna] ✓ New best:  {value:.6f} (trial {trial.number}, +{improvement:.6f})")
         else:
+            # Không cải thiện
             early_stop_state['no_improve_rounds'] += 1
+            
             if early_stop_state['no_improve_rounds'] >= early_stopping_rounds:
                 early_stop_state['stopped'] = True
+                # print(f"  [Optuna] ⊗ Early stopping at trial {trial.number}")
+                # print(f"           No improvement for {early_stopping_rounds} trials (tolerance={tolerance})")
+                # print(f"           Best score: {early_stop_state['best_value']:.6f} (trial {early_stop_state['best_trial_number']})")
                 study_ref.stop()
-
-    callbacks = []
-    if early_stopping_rounds and early_stopping_rounds > 0:
-        callbacks.append(_early_stop_callback)
-
-    study.optimize(optuna_objective, n_trials=n_trials, show_progress_bar=False, callbacks=callbacks)
-
-    # Thống kê prune/completion
-    try:
-        pruned_trials = sum(1 for t in study.trials if t.state == optuna.trial.TrialState.PRUNED)
-        completed_trials = sum(1 for t in study.trials if t.state == optuna.trial.TrialState.COMPLETE)
-    except Exception:
-        pruned_trials = None
-        completed_trials = None
-
-    # Xây dựng convergence history (best-so-far theo trial)
+    
+    # Setup callbacks
+    callbacks = [_early_stop_callback] if early_stopping_rounds > 0 else []
+    
+    # === RUN OPTIMIZATION ===
+    # print(f"  [Optuna] Starting optimization (max_trials={n_trials}, patience={early_stopping_rounds})")
+    opt_start = time.perf_counter()
+    
+    study.optimize(
+        optuna_objective,
+        n_trials=n_trials,
+        show_progress_bar=False,
+        callbacks=callbacks
+    )
+    
+    opt_time = time.perf_counter() - opt_start
+    
+    # === STATISTICS ===
+    completed_trials = [t for t in study.trials if t.state == optuna.trial. TrialState.COMPLETE]
+    pruned_trials = [t for t in study.trials if t.state == optuna.trial.TrialState.PRUNED]
+    failed_trials = [t for t in study.trials if t.state == optuna.trial.TrialState.FAIL]
+    
+    # print(f"  [Optuna] Optimization finished in {opt_time:.2f}s")
+    # print(f"           Completed: {len(completed_trials)}, Pruned: {len(pruned_trials)}, Failed: {len(failed_trials)}")
+    # print(f"           Early stopped: {early_stop_state['stopped']}")
+    # print(f"           Best score: {study.best_trial.value:.6f} (trial {study.best_trial.number})")
+    
+    # === CONVERGENCE HISTORY ===
     best_so_far = -float('inf')
     conv_history = []
-    for t in sorted(study.trials, key=lambda tr: tr.number):
-        if t.state != optuna.trial.TrialState.COMPLETE:
-            continue
+    for t in sorted(completed_trials, key=lambda tr: tr.number):
         if isinstance(t.value, (int, float)) and not math.isnan(t.value):
             best_so_far = max(best_so_far, float(t.value))
             conv_history.append(best_so_far)
-
+    
+    # === DIAGNOSTICS ===
     diagnostics = {
         'total_trials': len(study.trials),
+        'completed_trials': len(completed_trials),
+        'pruned_trials': len(pruned_trials),
+        'failed_trials': len(failed_trials),
         'iteration_to_best': study.best_trial.number + 1,
         'early_stopped': early_stop_state['stopped'],
-        'patience_used': early_stop_state['no_improve_rounds'] if early_stop_state['stopped'] else None,
-        'pruner': 'MedianPruner',
-        'pruned_trials': pruned_trials,
-        'completed_trials': completed_trials,
+        'patience_used': early_stop_state['no_improve_rounds'],
+        'pruner':  'MedianPruner',
         'convergence_history': conv_history,
+        'optimization_time': opt_time,
+        'avg_trial_time': opt_time / max(len(completed_trials), 1)
     }
+    
     return study.best_trial.value, study.best_params, diagnostics
 
 def run_hyperopt_tpe(objective, search_space, n_trials):
@@ -1960,10 +2152,10 @@ if __name__ == "__main__":
     # ----- CẤU HÌNH THỬ NGHIỆM -----
     QUICK_MODE = False  # Đặt False để chạy full pipeline với Nested CV
     # Chạy full: breast_cancer và telco
-    DATASETS = ['breast_cancer', 'telco', 'adult', 'credit']  # 2 datasets
+    DATASETS = ['breast_cancer']  # 2 datasets
     MODELS = ['random_forest', 'logistic_regression']
-    TOTAL_TRIALS = 100  # Full trials
-    SLICE_BUDGET = 10
+    TOTAL_TRIALS = 30  # Full trials
+    SLICE_BUDGET = 3
 
     USE_CROSS_VALIDATION = True
     CV_FOLDS = 5
@@ -1993,8 +2185,8 @@ if __name__ == "__main__":
     # AMSCO: 2 slices × 10 trials/slice = 20 trials effective
     # Optuna: 20 trials
     AMSCO_EARLY_STOP_SLICES = 2
-    AMSCO_EARLY_STOP_TOLERANCE = 1e-4
-    OPTUNA_EARLY_STOP_TRIALS = 20
+    AMSCO_EARLY_STOP_TOLERANCE = 1e-3
+    OPTUNA_EARLY_STOP_TRIALS = 15
     # =========================
     # --------------------------------
 
@@ -2023,7 +2215,7 @@ if __name__ == "__main__":
         TOTAL_TRIALS = 15          # giảm số trial
         CV_FOLDS = 3               # giảm số folds
     else:
-        SEEDS = list(range(1, 11))  # Chạy 10 seeds cho full pipeline
+        SEEDS = list(range(1, 6))  # Chạy 10 seeds cho full pipeline
 
     OPTUNA_RESULTS = []
     AMSCO_RESULTS = []
@@ -2085,6 +2277,7 @@ if __name__ == "__main__":
             'best_auc': best_auc
         }
 
+    true_test_cache = {}
     for seed in SEEDS:
         np.random.seed(seed)
         random.seed(seed)
@@ -2095,8 +2288,15 @@ if __name__ == "__main__":
             print(f"\n=======================================================")
             print(f"ĐANG THỬ NGHIỆM TRÊN BỘ DỮ LIỆU: {dataset_name.upper()} (seed={seed})")
             print(f"=======================================================")
+            # === TẠO TEST SET ĐỘC LẬP ===
             try:
-                X, y, preprocessor, _metric_default, sampler = get_data(dataset_name)
+                X_train_val, X_test_holdout, y_train_val, y_test_holdout, preprocessor, _metric_default, sampler = \
+                    prepare_data_with_holdout_test(dataset_name, test_size=0.2, random_state=seed)
+                
+                # Khởi tạo cache cho dataset
+                if dataset_name not in true_test_cache:
+                    true_test_cache[dataset_name] = {}
+
             except Exception as e:
                 print(f"  [WARNING] Bỏ qua dataset {dataset_name}: {e}")
                 continue
@@ -2107,7 +2307,9 @@ if __name__ == "__main__":
                 print(f"{'-'*60}")
 
                 search_space = dict(MASTER_SEARCH_SPACES[model_name])
-                X_train = X_valid = y_train = y_valid = None
+                
+                X = X_train_val  # ← Thay đổi này
+                y = y_train_val  # ← Thay đổi này
                 primary_metric = _metric_default if _metric_default else METRICS[0]
                 metrics_to_use = (primary_metric,) + tuple(m for m in METRICS if m != primary_metric)
                 
@@ -2220,15 +2422,18 @@ if __name__ == "__main__":
 
                     metric_scores = {m: np.nan for m in METRICS}
                     acc_cv5 = prec_cv5 = rec_cv5 = bal_cv5 = acc_val = np.nan
-                    acc_holdout = f1_holdout = auc_holdout = np.nan
+                    acc_holdout = f1_holdout = auc_holdout = acc_indep = np.nan
                     time_cv5_eval = time_holdout_eval = np.nan
+                    
                     try:
+                        # 1. Đánh giá CV/Validation trên X_train_val
                         model = _build_model_for_eval(model_name)
                         if sampler is not None:
                             pipeline = ImbPipeline(steps=[('preprocessor', preprocessor), ('sampler', clone(sampler)), ('classifier', model)])
                         else:
                             pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('classifier', model)])
                         pipeline.set_params(**params)
+
                         if USE_CROSS_VALIDATION:
                             cv = StratifiedKFold(n_splits=CV_FOLDS, shuffle=True, random_state=seed)
                             fold_metrics_all = {m: [] for m in METRICS}
@@ -2257,6 +2462,7 @@ if __name__ == "__main__":
                                                 fold_metrics_all[m].append(np.nan)
                             for m in METRICS:
                                 metric_scores[m] = np.nanmean(fold_metrics_all[m]) if fold_metrics_all[m] else np.nan
+                            
                             if not QUICK_MODE:
                                 try:
                                     cv5 = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
@@ -2268,43 +2474,13 @@ if __name__ == "__main__":
                                     time_cv5_eval = time.time() - _t0
                                 except Exception as e:
                                     print(f"  [WARN] Không tính được metric CV=5 cho {optimizer_name}: {e}")
-
-                            # Đánh giá holdout để phục vụ bảng tổng hợp Without CV
-                            try:
-                                X_tr_hold, X_te_hold, y_tr_hold, y_te_hold = train_test_split(
-                                    X,
-                                    y,
-                                    test_size=TEST_SIZE,
-                                    stratify=y,
-                                    random_state=seed
-                                )
-                                pipeline_holdout = clone(pipeline)
-                                _t_hold = time.time()
-                                pipeline_holdout.fit(X_tr_hold, y_tr_hold)
-                                y_pred_hold = pipeline_holdout.predict(X_te_hold)
-                                time_holdout_eval = time.time() - _t_hold
-                                acc_holdout = float(accuracy_score(y_te_hold, y_pred_hold))
-                                try:
-                                    f1_holdout = float(f1_score(y_te_hold, y_pred_hold, average='binary'))
-                                except Exception:
-                                    f1_holdout = np.nan
-                                try:
-                                    if hasattr(pipeline_holdout.named_steps['classifier'], 'predict_proba'):
-                                        y_prob_hold = pipeline_holdout.predict_proba(X_te_hold)[:, 1]
-                                    elif hasattr(pipeline_holdout.named_steps['classifier'], 'decision_function'):
-                                        y_prob_hold = pipeline_holdout.decision_function(X_te_hold)
-                                    else:
-                                        y_prob_hold = None
-                                    auc_holdout = float(roc_auc_score(y_te_hold, y_prob_hold)) if y_prob_hold is not None else np.nan
-                                except Exception:
-                                    auc_holdout = np.nan
-                            except Exception as e:
-                                print(f"  [WARN] Không tính được metric holdout cho {optimizer_name}: {e}")
                         else:
-                            _t2 = time.time()
+                            # Holdout optimization mode (X is X_train_val)
+                            X_train, X_valid, y_train, y_valid = train_test_split(
+                                X, y, test_size=TEST_SIZE, stratify=y, random_state=seed
+                            )
                             pipeline.fit(X_train, y_train)
                             y_pred = pipeline.predict(X_valid)
-                            time_holdout_eval = time.time() - _t2
                             metric_scores['accuracy'] = float(accuracy_score(y_valid, y_pred))
                             try:
                                 metric_scores['f1'] = float(f1_score(y_valid, y_pred, average='binary'))
@@ -2315,37 +2491,32 @@ if __name__ == "__main__":
                                 metric_scores['roc_auc'] = float(roc_auc_score(y_valid, y_proba)) if y_proba is not None else np.nan
                             except Exception:
                                 metric_scores['roc_auc'] = np.nan
-                            
-                            acc_cv5 = np.nan
-                            prec_cv5 = np.nan
-                            rec_cv5 = np.nan
-                            bal_cv5 = np.nan
-                            acc_val = np.nan
 
-                            if not QUICK_MODE:
-                                try:
-                                    cv5 = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
-                                    _t3 = time.time()
-                                    acc_cv5 = cross_val_score(pipeline, X_train, y_train, cv=cv5, scoring='accuracy', n_jobs=-1).mean()
-                                    prec_cv5 = cross_val_score(pipeline, X_train, y_train, cv=cv5, scoring='precision', n_jobs=-1).mean()
-                                    rec_cv5 = cross_val_score(pipeline, X_train, y_train, cv=cv5, scoring='recall', n_jobs=-1).mean()
-                                    bal_cv5 = cross_val_score(pipeline, X_train, y_train, cv=cv5, scoring='balanced_accuracy', n_jobs=-1).mean()
-                                    time_cv5_eval = time.time() - _t3
+                        # 2. Đánh giá True Test trên X_test_holdout (ĐỘC LẬP)
+                        print(f"  [True Test] Evaluating on held-out test set ({len(X_test_holdout)} samples)...")
+                        true_test_metrics = evaluate_on_holdout_test(
+                            best_params=params,
+                            model_name=model_name,
+                            preprocessor=preprocessor,
+                            X_train=X, # X_train_val
+                            y_train=y, # y_train_val
+                            X_test=X_test_holdout,
+                            y_test=y_test_holdout,
+                            sampler=sampler
+                        )
+                        acc_holdout = true_test_metrics['accuracy']
+                        f1_holdout = true_test_metrics['f1']
+                        auc_holdout = true_test_metrics['roc_auc']
+                        acc_indep = acc_holdout
+                        print(f"  [True Test] Accuracy: {acc_holdout:.4f}, F1: {f1_holdout:.4f}, AUC: {auc_holdout:.4f}")
 
-                                    # Calculate simple holdout validation score (for Table 4.3 Hold-out row)
-                                    # Split X_train (70%) into Train' (56%) and Val (14%) -> 80/20 split of X_train
-                                    X_tr_val, X_te_val, y_tr_val, y_te_val = train_test_split(X_train, y_train, test_size=0.2, random_state=seed, stratify=y_train)
-                                    val_model = clone(pipeline)
-                                    val_model.fit(X_tr_val, y_tr_val)
-                                    acc_val = val_model.score(X_te_val, y_te_val)
+                        # Lưu vào cache
+                        if optimizer_name not in true_test_cache[dataset_name]:
+                            true_test_cache[dataset_name][optimizer_name] = {}
+                        true_test_cache[dataset_name][optimizer_name][model_name] = true_test_metrics
 
-                                except Exception as e:
-                                    print(f"  [WARN] Không tính được metric CV=5/Val (holdout mode) cho {optimizer_name}: {e}")
-                            acc_holdout = metric_scores.get('accuracy', np.nan)
-                            f1_holdout = metric_scores.get('f1', np.nan)
-                            auc_holdout = metric_scores.get('roc_auc', np.nan)
                     except Exception as e:
-                        print(f"  [WARN] Lỗi khi tính metrics bổ sung cho {optimizer_name}: {e}")
+                        print(f"  [WARN] Lỗi khi tính metrics: {e}")
 
                     # Lưu convergence history (nếu optimizer có trả về)
                     conv_hist = diag_stats.get('convergence_history') if isinstance(diag_stats, dict) else None
@@ -2389,6 +2560,7 @@ if __name__ == "__main__":
                         'prec_cv5': prec_cv5,
                         'recall_cv5': rec_cv5,
                         'bal_acc_cv5': bal_cv5,
+                        'acc_indep': acc_indep,  # Thêm kết quả trên tập test độc lập
                         'time': exec_time,
                         'opt_wall_time': combined_stats.get('wall_time', np.nan),
                         'opt_cpu_time': combined_stats.get('cpu_time', np.nan),
@@ -2770,6 +2942,9 @@ if __name__ == "__main__":
 
         # Nested CV (bỏ qua nếu QUICK_MODE)
         nested_cache = {} # Structure: nested_cache[dataset][method] = {'accuracy': ..., ...}
+        # Cache lưu True Test Accuracy (độc lập hoàn toàn)
+        # true_test_cache đã được populate trong vòng lặp chính
+
         if not QUICK_MODE:
             try:
                 # Khởi tạo cache cho từng dataset
@@ -2816,8 +2991,8 @@ if __name__ == "__main__":
                 print(f"[WARN] Không thể tính Nested CV tổng hợp: {e}")
                 nested_cache = {}
 
-        # Tính ground truth theo từng dataset dựa trên Nested CV outer-fold (nếu khả dụng)
-        ground_truth_by_dataset = {}
+        # Tính Nested CV estimates (để so sánh)
+        nested_cv_estimates = {}
         if nested_cache:
             for dataset_name, method_dict in nested_cache.items():
                 nested_vals = []
@@ -2829,7 +3004,15 @@ if __name__ == "__main__":
                     if isinstance(acc_val_nested, (int, float, np.floating)) and not np.isnan(acc_val_nested):
                         nested_vals.append(float(acc_val_nested))
                 if nested_vals:
-                    ground_truth_by_dataset[dataset_name] = float(np.mean(nested_vals))
+                    nested_cv_estimates[dataset_name] = float(np.mean(nested_vals))
+
+        # Tính ground truth thực sự (True Test Acc) dựa trên tập độc lập (acc_holdout)
+        ground_truth_by_dataset = {}
+        for dataset_name in DATASETS:
+            if 'acc_holdout' in results_df.columns:
+                holdout_vals = results_df[results_df['dataset'] == dataset_name]['acc_holdout'].dropna().values
+                if len(holdout_vals) > 0:
+                    ground_truth_by_dataset[dataset_name] = float(np.mean(holdout_vals))
 
         # ============================================================
         # BẢNG 4.3: So sánh Bias và Variance trung bình trên 4 datasets
@@ -2842,54 +3025,79 @@ if __name__ == "__main__":
             eval_methods = [
                 ('Hold-out (70/30)', 'acc_holdout'),
                 ('Standard 5-Fold', 'acc_cv5'),
-                ('Nested CV (5x3)', 'nested_ground_truth')  # Tính từ nested_cache
+                ('Nested CV (5x3)', 'nested_cv')
             ]
             
             bias_var_rows = []
             for method_name, metric_key in eval_methods:
-                dataset_estimates = {}
+                # Thu thập TẤT CẢ các giá trị (từng seed/fold) thay vì chỉ trung bình
+                all_estimates = []
+                all_truths = []
+                all_biases = []
 
-                if metric_key == 'nested_ground_truth':
-                    dataset_estimates = ground_truth_by_dataset.copy()
+                if metric_key == 'nested_cv':
+                    # Lấy từ nested_cache - thu thập từng giá trị
+                    for dataset_name in DATASETS:
+                        if dataset_name in nested_cache:
+                            for res in nested_cache[dataset_name].values():
+                                if isinstance(res, dict) and 'accuracy' in res:
+                                    all_estimates.append(float(res['accuracy']))
+                                elif isinstance(res, (int, float)):
+                                    all_estimates.append(float(res))
                 else:
+                    # Lấy từ results_df - thu thập TẤT CẢ các giá trị, không lấy trung bình
                     if metric_key not in results_df.columns:
                         continue
-                    for dataset_name in DATASETS:
+                    for dataset_name in DATASETS: 
                         dataset_values = results_df[results_df['dataset'] == dataset_name][metric_key].dropna().values
-                        if len(dataset_values) > 0:
-                            dataset_estimates[dataset_name] = float(np.mean(dataset_values))
+                        all_estimates.extend([float(v) for v in dataset_values])
 
-                if not dataset_estimates:
+                if not all_estimates:
                     continue
 
-                if ground_truth_by_dataset:
-                    paired_truths = []
-                    paired_estimates = []
-                    biases = []
-                    for dataset_name, est_val in dataset_estimates.items():
-                        truth_val = ground_truth_by_dataset.get(dataset_name)
-                        if truth_val is None:
+                # === TÍNH GROUND TRUTH TỪ TRUE TEST CACHE ===
+                if true_test_cache: 
+                    # Thu thập tất cả các true test values tương ứng với mỗi estimate
+                    for dataset_name in DATASETS:
+                        if dataset_name not in true_test_cache: 
                             continue
-                        paired_truths.append(truth_val)
-                        paired_estimates.append(est_val)
-                        biases.append(est_val - truth_val)
-                    if not paired_truths:
+                        
+                        # Tính trung bình True Test Accuracy qua các optimizer và models
+                        true_test_vals = []
+                        for opt_dict in true_test_cache[dataset_name].values():
+                            for model_metrics in opt_dict.values():
+                                if isinstance(model_metrics, dict) and 'accuracy' in model_metrics:
+                                    true_test_vals.append(model_metrics['accuracy'])
+                        
+                        if not true_test_vals:
+                            continue
+                        
+                        truth_val = float(np.mean(true_test_vals))
+                        
+                        # Lấy số lượng estimates cho dataset này
+                        if metric_key == 'nested_cv':
+                            n_estimates = len([v for k, v in nested_cache.get(dataset_name, {}).items()])
+                        else:
+                            n_estimates = len(results_df[results_df['dataset'] == dataset_name][metric_key].dropna())
+                        
+                        # Thêm truth_val cho mỗi estimate
+                        all_truths.extend([truth_val] * n_estimates)
+                    
+                    if not all_truths or len(all_truths) != len(all_estimates):
                         continue
-                    true_test_acc = float(np.mean(paired_truths))
-                    est_acc = float(np.mean(paired_estimates))
-                    avg_bias = float(np.mean(biases))
-                    std_vals = np.array(paired_estimates)
+                    
+                    all_biases = [est - truth for est, truth in zip(all_estimates, all_truths)]
+                    
+                    true_test_acc = float(np.mean(all_truths))
+                    est_acc = float(np.mean(all_estimates))
+                    avg_bias = float(np.mean(all_biases))
+                    std_vals = np.array(all_estimates)
                 else:
-                    # Fallback: sử dụng acc_holdout làm ground truth như trước
-                    vals = list(dataset_estimates.values())
-                    true_vals = results_df['acc_holdout'].dropna().values
-                    if len(vals) == 0 or len(true_vals) == 0:
-                        continue
-                    est_acc = float(np.mean(vals))
-                    true_test_acc = float(np.mean(true_vals))
-                    avg_bias = est_acc - true_test_acc
-                    std_vals = np.array(vals)
+                    # Fallback: Không có true test cache
+                    print("  [WARN] Không có True Test Cache, bỏ qua phương pháp này")
+                    continue
 
+                # Tính std dev từ TẤT CẢ các giá trị
                 avg_std = float(np.std(std_vals, ddof=1)) if len(std_vals) > 1 else 0.0
                 min_std = float(np.min(np.abs(std_vals - est_acc))) if len(std_vals) > 1 else 0.0
                 max_std = float(np.max(np.abs(std_vals - est_acc))) if len(std_vals) > 1 else 0.0
@@ -2906,11 +3114,14 @@ if __name__ == "__main__":
             if bias_var_rows:
                 bias_var_df = pd.DataFrame(bias_var_rows)
                 print(bias_var_df.to_string(index=False))
+                print("\nGhi chú: True Test Acc. là accuracy trên tập test độc lập (20%), KHÔNG tham gia Nested CV.")
                 print()
             else:
                 print("Không đủ dữ liệu để tạo bảng (cần chạy với nhiều seeds hơn)")
         except Exception as e:
             print(f"[WARN] Không thể tạo Bảng 4.3: {e}")
+            import traceback
+            traceback.print_exc()
 
         # ============================================================
         # BẢNG 4.4: Chi tiết Bias và Variance theo từng Dataset
@@ -2923,9 +3134,7 @@ if __name__ == "__main__":
             dataset_bias_rows = []
             
             # Cấu hình tên cột (Sửa lại cho khớp với dataframe của bạn)
-            COL_HOLDOUT = 'acc_holdout'  # Cột điểm Test thực tế
-            COL_CV_SCORE = 'acc_cv5'     # Cột điểm Validation/CV (Lưu ý kiểm tra tên cột này!)
-            # Nếu trong df tên là 'accuracy' thì đổi dòng trên thành 'accuracy'
+            COL_CV_SCORE = 'acc_cv5'     # Cột điểm Validation/CV
             
             for dataset in DATASETS:
                 # Lọc dữ liệu theo dataset
@@ -2934,15 +3143,18 @@ if __name__ == "__main__":
                 if len(dataset_results) == 0:
                     continue
 
-                # 1. True Test Acc (Ground Truth) lấy từ Nested CV outer-fold nếu có
-                if ground_truth_by_dataset:
-                    true_acc = ground_truth_by_dataset.get(dataset)
-                else:
-                    true_acc = None
-                if true_acc is None and COL_HOLDOUT in dataset_results.columns:
-                    # Fallback sử dụng holdout trung bình nếu thiếu nested
-                    true_acc = dataset_results[COL_HOLDOUT].mean()
-                if true_acc is None:
+                # 1. True Test Acc (Ground Truth) lấy từ true_test_cache
+                true_acc = None
+                if dataset in true_test_cache:
+                    true_test_vals = []
+                    for opt_dict in true_test_cache[dataset].values():
+                        for model_metrics in opt_dict.values():
+                            if isinstance(model_metrics, dict) and 'accuracy' in model_metrics:
+                                true_test_vals.append(model_metrics['accuracy'])
+                    if true_test_vals:
+                        true_acc = float(np.mean(true_test_vals))
+                
+                if true_acc is None or pd.isna(true_acc):
                     continue
                 
                 for method_label in ['Standard 5-Fold', 'Nested CV']:
@@ -2995,15 +3207,13 @@ if __name__ == "__main__":
                 dataset_bias_df = pd.DataFrame(dataset_bias_rows)
                 # Format lại bảng in ra
                 print(dataset_bias_df.to_string(index=False))
-                print("\nNhận xét nhanh:")
-                print("- Bias Dương (+): Phương pháp đánh giá đang 'lạc quan' quá mức (Overestimation).")
-                print("- Bias gần 0: Phương pháp đánh giá trung thực, sát thực tế.")
                 print()
             else:
-                print("Không có dữ liệu hợp lệ để tạo bảng.")
-                
+                print("Không đủ dữ liệu để tạo bảng 4.4")
         except Exception as e:
-            print(f"[ERROR] Lỗi tạo Bảng 4.4: {e}")
+            print(f"[WARN] Không thể tạo Bảng 4.4: {e}")
+            import traceback
+            traceback.print_exc()
 
         # ============================================================
         # BẢNG 4.5: Tốc độ Hội tụ và Thời gian Thực thi (5 outer folds)
