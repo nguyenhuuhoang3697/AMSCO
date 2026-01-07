@@ -1,4 +1,4 @@
-# AMSCO (Automated Model Selection and Configuration Optimization)
+# AMSCO (Adaptive Multi-Strategy Coordinated Optimization)
 
 AMSCO là một framework tối ưu hóa siêu tham số tự động, kết hợp nhiều phương pháp tối ưu hóa khác nhau như Random Search, Bayesian Optimization (TPE), và Grid Search trong một hệ thống đa tác tử thông minh.
 
@@ -8,7 +8,6 @@ AMSCO là một framework tối ưu hóa siêu tham số tự động, kết h�
 - Hỗ trợ nhiều thuật toán tối ưu hóa:
   - Random Search
   - Bayesian Optimization (TPE via Optuna)
-  - Hyperopt TPE
   - Grid Search (tinh chỉnh local)
 - Hệ thống đa tác tử thông minh với cơ chế học tăng cường
 - Tự động điều chỉnh ngân sách tính toán giữa các tác tử
@@ -142,10 +141,7 @@ pkill -f "python -u amsco_adult_v2.py"
 
 ## Kết quả
 
-AMSCO được thử nghiệm trên 4 bộ dữ liệu với 4 loại mô hình khác nhau, so sánh với các baseline:
-- Random Search
-- Optuna (TPE)
-- Hyperopt (TPE)
+AMSCO được thử nghiệm trên 4 bộ dữ liệu với 2 loại mô hình khác nhau, so sánh với baseline Optuna (TPE)
 
 ## Tài liệu tham khảo
 

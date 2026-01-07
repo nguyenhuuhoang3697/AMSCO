@@ -1,0 +1,4 @@
+strategy,Est. Acc.,True Test Acc.,Avg Bias,Avg Std Dev,Min-Max Std
+Hold-out,0.8914,0.8831,+0.0083,± 0.0072,0.0002 - 0.0136
+Standard 5-Fold,0.8873,0.8858,+0.0015,± 0.0027,0.0001 - 0.0064
+Nested CV (5x3),0.8844,0.8860,-0.0017,± 0.0034,0.0001 - 0.0075

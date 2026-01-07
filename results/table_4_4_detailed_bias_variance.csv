@@ -1,0 +1,9 @@
+Dataset,Method,Est. Acc.,True Test Acc.,Bias,Std Dev
+breast_cancer,Standard 5-Fold,0.9703,0.9716,-0.0013,± 0.0089
+breast_cancer,Nested CV,0.9643,0.9721,-0.0078,± 0.0110
+telco,Standard 5-Fold,0.7710,0.7655,+0.0055,± 0.0265
+telco,Nested CV,0.7673,0.7658,+0.0015,± 0.0296
+adult,Standard 5-Fold,0.8205,0.8187,+0.0018,± 0.0109
+adult,Nested CV,0.8184,0.8188,-0.0004,± 0.0095
+credit,Standard 5-Fold,0.9875,0.9874,+0.0001,± 0.0104
+credit,Nested CV,0.9874,0.9874,+0.0000,± 0.0105

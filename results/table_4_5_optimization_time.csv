@@ -1,0 +1,13 @@
+dataset,model,method,Time (s)
+adult,logistic_regression,AMSCO,39.46 ± 1.85
+adult,logistic_regression,Optuna (TPE),73.10 ± 2.59
+adult,random_forest,AMSCO,424.77 ± 65.52
+adult,random_forest,Optuna (TPE),499.90 ± 56.15
+breast_cancer,logistic_regression,AMSCO,12.44 ± 2.55
+breast_cancer,logistic_regression,Optuna (TPE),16.10 ± 1.10
+breast_cancer,random_forest,AMSCO,116.22 ± 4.74
+breast_cancer,random_forest,Optuna (TPE),147.72 ± 3.33
+telco,logistic_regression,AMSCO,24.89 ± 1.97
+telco,logistic_regression,Optuna (TPE),41.71 ± 3.71
+telco,random_forest,AMSCO,212.96 ± 60.30
+telco,random_forest,Optuna (TPE),270.52 ± 47.61

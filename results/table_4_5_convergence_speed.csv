@@ -1,0 +1,11 @@
+Dataset,Method,Time (s),Trials to 99%,Speedup,F1-Score,AUC-ROC,P-value (Time)
+breast_cancer,Optuna,109,1.7,-,0.9711,0.9917,-
+breast_cancer,AMSCO,73,2.0,1.50x,0.9720,0.9918,0.000
+telco,Optuna,244,8.1,-,0.6166,0.8353,-
+telco,AMSCO,139,6.4,1.76x,0.6156,0.8348,0.000
+credit,Optuna,725,1.0,-,0.6568,0.9794,-
+credit,AMSCO,475,1.0,1.53x,0.6569,0.9792,0.000
+adult,Optuna,484,4.2,-,0.6893,0.9107,-
+adult,AMSCO,266,3.7,1.82x,0.6875,0.9108,0.000
+Trung bình,Optuna,391,3.8,-,0.7334,0.9293,-
+Trung bình,AMSCO,238,3.3,1.64x,0.7330,0.9292,< 0.001

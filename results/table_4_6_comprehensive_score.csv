@@ -1,0 +1,11 @@
+Dataset,Method,F1-Score (Norm.),AUC-ROC (Norm.),Time (Norm.),f(theta),Rank
+Breast Cancer,Optuna,0.9711 (0.999),0.9917 (1.000),109s (1.000),0.800,2
+Breast Cancer,AMSCO,0.9720 (1.000),0.9918 (1.000),73s (0.667),0.867,1 (*)
+Telco Churn,Optuna,0.6166 (1.000),0.8353 (1.000),244s (1.000),0.800,2
+Telco Churn,AMSCO,0.6156 (0.998),0.8348 (0.999),139s (0.567),0.886,1 (*)
+credit,Optuna,0.6568 (1.000),0.9794 (1.000),725s (1.000),0.800,2
+credit,AMSCO,0.6569 (1.000),0.9792 (1.000),475s (0.655),0.869,1 (*)
+Adult Income,Optuna,0.6893 (1.000),0.9107 (1.000),484s (1.000),0.800,2
+Adult Income,AMSCO,0.6875 (0.997),0.9108 (1.000),266s (0.549),0.889,1 (*)
+Trung bình,Optuna,-,-,-,0.800,2
+Trung bình,AMSCO,-,-,-,0.878,1 (*)

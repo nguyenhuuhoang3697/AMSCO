@@ -1,0 +1,13 @@
+Dataset,Model,Metric,Mean AMSCO,Mean Optuna,p-value,Significant,Cohen's d
+breast_cancer,logistic_regression,F1-Score,0.9789,0.9795,1.0000e+00,No,-0.1143
+breast_cancer,logistic_regression,Time,12.4363,16.0980,2.0000e-01,No,-1.8608
+breast_cancer,random_forest,F1-Score,0.9632,0.9602,4.0000e-01,No,0.8250
+breast_cancer,random_forest,Time,116.2248,147.7242,1.0000e-01,No,-7.6941
+telco,logistic_regression,F1-Score,0.6195,0.6123,1.0000e-01,No,1.8862
+telco,logistic_regression,Time,24.8906,41.7081,1.0000e-01,No,-5.6619
+telco,random_forest,F1-Score,0.6102,0.6108,1.0000e+00,No,-0.0729
+telco,random_forest,Time,212.9563,270.5249,4.0000e-01,No,-1.0597
+adult,logistic_regression,F1-Score,0.6775,0.6774,1.0000e+00,No,0.0417
+adult,logistic_regression,Time,39.4598,73.0959,1.0000e-01,No,-14.9308
+adult,random_forest,F1-Score,0.6926,0.6968,1.0000e-01,No,-3.4183
+adult,random_forest,Time,424.7659,499.9010,4.0000e-01,No,-1.2314

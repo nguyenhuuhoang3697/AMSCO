@@ -1,0 +1,5 @@
+Dataset,Optuna Var,AMSCO Var,Improvement,Wilcoxon p-value
+Breast Cancer,0.000013,0.000009,✓ 32.1%,1.000
+Telco Churn,0.000030,0.000022,✓ 28.6%,0.557
+credit,0.000039,0.000036,✓ 7.1%,0.770
+Adult Income,0.000004,0.000004,-14.3%,0.002
