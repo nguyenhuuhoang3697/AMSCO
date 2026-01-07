@@ -1,12 +1,1289 @@
 nohup: ignoring input
-Watching log…
-TELEGRAM_TOKEN set: True, CHAT_ID set: True
-Following log file: output.log
-[TELEGRAM] Sent initial snapshot (18 lines).
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
-[TELEGRAM] Exception while sending photo: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)
+[INFO] Starting log watcher...
+[INFO] TELEGRAM_TOKEN set: True
+[INFO] CHAT_ID set: True
+[INFO] Watching log file: output.log
+[INFO] Poll interval: 1.0s
+------------------------------------------------------------
+[INFO] Now monitoring for new changes...
+------------------------------------------------------------
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_0.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 0) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_0.csv
+[LOG] Completed credit - Seed 0
+[NOTIFY] ✅ Completed: credit - Seed 0
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 1
+[NOTIFY] 🚀 Starting: credit - Seed 1
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 1) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_1.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 1) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_1.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 1) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_1.csv
+[LOG] Completed credit - Seed 1
+[NOTIFY] ✅ Completed: credit - Seed 1
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 2
+[NOTIFY] 🚀 Starting: credit - Seed 2
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 2) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_2.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 2) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_2.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 2) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_2.csv
+[LOG] Completed credit - Seed 2
+[NOTIFY] ✅ Completed: credit - Seed 2
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 3
+[NOTIFY] 🚀 Starting: credit - Seed 3
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 3) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_3.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 3) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_3.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 3) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_3.csv
+[LOG] Completed credit - Seed 3
+[NOTIFY] ✅ Completed: credit - Seed 3
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 4
+[NOTIFY] 🚀 Starting: credit - Seed 4
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 4) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_4.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 4) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_4.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 4) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_4.csv
+[LOG] Completed credit - Seed 4
+[NOTIFY] ✅ Completed: credit - Seed 4
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 5
+[NOTIFY] 🚀 Starting: credit - Seed 5
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 5) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_5.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 5) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_5.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 5) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_5.csv
+[LOG] Completed credit - Seed 5
+[NOTIFY] ✅ Completed: credit - Seed 5
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 6
+[NOTIFY] 🚀 Starting: credit - Seed 6
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 6) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_6.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 6) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_6.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 6) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_6.csv
+[LOG] Completed credit - Seed 6
+[NOTIFY] ✅ Completed: credit - Seed 6
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 7
+[NOTIFY] 🚀 Starting: credit - Seed 7
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 7) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_7.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 7) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_7.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 7) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_7.csv
+[LOG] Completed credit - Seed 7
+[NOTIFY] ✅ Completed: credit - Seed 7
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 8
+[NOTIFY] 🚀 Starting: credit - Seed 8
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 8) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_8.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 8) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_8.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 8) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_8.csv
+[LOG] Completed credit - Seed 8
+[NOTIFY] ✅ Completed: credit - Seed 8
+[LOG] ----------------------------------------------------------------
+[LOG] Processing credit - Seed 9
+[NOTIFY] 🚀 Starting: credit - Seed 9
+[LOG] ----------------------------------------------------------------
+[LOG] [1/2] Running Holdout...
+[PROGRESS] Holdout: 1/2 (50%)
+[LOG] === Running Holdout Task: credit (Seed 9) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/holdout_credit_seed_9.csv
+[LOG] [2/3] Running Nested CV...
+[PROGRESS] Nested: 2/3 (67%)
+[LOG] === Running Nested CV Task: credit (Seed 9) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 10
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] [Nested CV] Processing Outer Fold 1/5...
+[LOG] [Nested CV] Processing Outer Fold 2/5...
+[LOG] [Nested CV] Processing Outer Fold 3/5...
+[LOG] [Nested CV] Processing Outer Fold 4/5...
+[LOG] [Nested CV] Processing Outer Fold 5/5...
+[LOG] [Comparison] Running Standard 5-Fold CV on full Dev set for True Test score...
+[LOG] Saved results_step2/nested_credit_seed_9.csv
+[LOG] [3/3] Running Standard CV...
+[PROGRESS] Standard: 3/3 (100%)
+[LOG] === Running Standard CV Task: credit (Seed 9) ===
+[LOG] Loading data for credit...
+[LOG] Original Dev set: 227845, Test set: 56962
+[LOG] [Credit Undersampling] Original: 227845 (Class 0: 227451, Class 1: 394)
+[LOG] [Credit Undersampling] Sampled:  40394 (Class 0: 40000, Class 1: 394) - Giảm 82.3%
+[LOG] Undersampled Dev set: 40394, Test set: 10098
+[LOG] >> Method: AMSCO, Model: logistic_regression
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: AMSCO, Model: random_forest
+[LOG] [AMSCO Orchestrator] Slice 1 | Budget remaining: 50
+[LOG] [AMSCO Orchestrator] Slice 2 | Budget remaining: 40
+[LOG] [AMSCO Orchestrator] Slice 3 | Budget remaining: 30
+[LOG] [AMSCO Orchestrator] Slice 4 | Budget remaining: 20
+[LOG] [AMSCO Orchestrator] Slice 5 | Budget remaining: 10
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: logistic_regression
+[LOG] Evaluating on True Test set...
+[LOG] >> Method: Optuna (TPE), Model: random_forest
+[LOG] Evaluating on True Test set...
+[LOG] Saved results_step2/standard_cv_credit_seed_9.csv
+[LOG] Completed credit - Seed 9
+[NOTIFY] ✅ Completed: credit - Seed 9
+[LOG] All experiments completed.
