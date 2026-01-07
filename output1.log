@@ -1,0 +1,52 @@
+nohup: ignoring input
+
+=== Table 4.3: Reliability of Validation Strategies ===
+                Est. Acc. True Test Acc. Avg Bias Avg Std Dev      Min-Max Std
+strategy                                                                      
+Hold-out           0.8914         0.8831  +0.0083    ± 0.0072  0.0002 - 0.0136
+Standard 5-Fold    0.8873         0.8858  +0.0015    ± 0.0027  0.0001 - 0.0064
+Nested CV (5x3)    0.8844         0.8860  -0.0017    ± 0.0034  0.0001 - 0.0075
+
+=== Table 4.4: Detailed Bias and Variance Analysis per Dataset ===
+      Dataset          Method Est. Acc. True Test Acc.    Bias  Std Dev
+breast_cancer Standard 5-Fold    0.9703         0.9716 -0.0013 ± 0.0089
+breast_cancer       Nested CV    0.9643         0.9721 -0.0078 ± 0.0110
+        telco Standard 5-Fold    0.7710         0.7655 +0.0055 ± 0.0265
+        telco       Nested CV    0.7673         0.7658 +0.0015 ± 0.0296
+        adult Standard 5-Fold    0.8205         0.8187 +0.0018 ± 0.0109
+        adult       Nested CV    0.8184         0.8188 -0.0004 ± 0.0095
+       credit Standard 5-Fold    0.9875         0.9874 +0.0001 ± 0.0104
+       credit       Nested CV    0.9874         0.9874 +0.0000 ± 0.0105
+
+=== Table 4.5: Convergence Speed and Execution Time (Nested CV) ===
+      Dataset Method Time (s) Trials to 99% Speedup F1-Score AUC-ROC P-value (Time)
+breast_cancer Optuna      109           1.7       -   0.9711  0.9917              -
+breast_cancer  AMSCO       73           2.0   1.50x   0.9720  0.9918          0.000
+        telco Optuna      244           8.1       -   0.6166  0.8353              -
+        telco  AMSCO      139           6.4   1.76x   0.6156  0.8348          0.000
+       credit Optuna      725           1.0       -   0.6568  0.9794              -
+       credit  AMSCO      475           1.0   1.53x   0.6569  0.9792          0.000
+        adult Optuna      484           4.2       -   0.6893  0.9107              -
+        adult  AMSCO      266           3.7   1.82x   0.6875  0.9108          0.000
+   Trung bình Optuna      391           3.8       -   0.7334  0.9293              -
+   Trung bình  AMSCO      238           3.3   1.64x   0.7330  0.9292        < 0.001
+
+=== Table 4.6: Comprehensive Objective Function Score ===
+      Dataset Method F1-Score (Norm.) AUC-ROC (Norm.) Time (Norm.) f(theta)  Rank
+Breast Cancer Optuna   0.9711 (0.999)  0.9917 (1.000) 109s (1.000)    0.800     2
+Breast Cancer  AMSCO   0.9720 (1.000)  0.9918 (1.000)  73s (0.667)    0.867 1 (*)
+  Telco Churn Optuna   0.6166 (1.000)  0.8353 (1.000) 244s (1.000)    0.800     2
+  Telco Churn  AMSCO   0.6156 (0.998)  0.8348 (0.999) 139s (0.567)    0.886 1 (*)
+       credit Optuna   0.6568 (1.000)  0.9794 (1.000) 725s (1.000)    0.800     2
+       credit  AMSCO   0.6569 (1.000)  0.9792 (1.000) 475s (0.655)    0.869 1 (*)
+ Adult Income Optuna   0.6893 (1.000)  0.9107 (1.000) 484s (1.000)    0.800     2
+ Adult Income  AMSCO   0.6875 (0.997)  0.9108 (1.000) 266s (0.549)    0.889 1 (*)
+   Trung bình Optuna                -               -            -    0.800     2
+   Trung bình  AMSCO                -               -            -    0.878 1 (*)
+
+=== Table 4.7: Variance Comparison of F1-Score (Stability) ===
+      Dataset Optuna Var AMSCO Var Improvement Wilcoxon p-value
+Breast Cancer   0.000013  0.000009     ✓ 32.1%            1.000
+  Telco Churn   0.000030  0.000022     ✓ 28.6%            0.557
+       credit   0.000039  0.000036      ✓ 7.1%            0.770
+ Adult Income   0.000004  0.000004      -14.3%            0.002
