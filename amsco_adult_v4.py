@@ -1397,8 +1397,9 @@ class MetaController_UCB1:
     Cơ chế theo lý thuyết AMSCO:
     - Performance Score: S_{i,t} = α·(Δ_{i,t}/(C_{i,t}+ε)) + β·sqrt(ln(ΣN_j)/(N_i+ε))
     - Budget Allocation: b_{i,t} = B_t · (S_{i,t})^γ / Σ(S_{j,t})^γ
+    - Cold Start: Parallel initialization với n_startup_trials cho mỗi agent
     """
-    def __init__(self, agent_ids, verbose=False, alpha=0.7, beta=0.3, gamma=1.0, epsilon=1e-5):
+    def __init__(self, agent_ids, verbose=False, alpha=0.7, beta=0.3, gamma=1.0, epsilon=1e-5, n_startup_trials=3):
         self.agent_ids = agent_ids
         self.agent_pulls = {agent_id: 0 for agent_id in agent_ids}  # N_{i,t}: Số trials
         self.agent_rewards = {agent_id: 0.0 for agent_id in agent_ids}
@@ -1412,6 +1413,7 @@ class MetaController_UCB1:
         self.beta = beta    # Trọng số cho tiềm năng khám phá (exploration - UCB1)
         self.gamma = gamma  # Hệ số áp lực khai thác (exploitation pressure)
         self.epsilon = epsilon  # Hằng số ổn định số học (10^-5)
+        self.n_startup_trials = max(1, int(n_startup_trials))  # Số trials khởi động tối thiểu cho mỗi agent
 
     def allocate(self, slice_budget, performance_monitor=None):
         """
@@ -1421,14 +1423,49 @@ class MetaController_UCB1:
             slice_budget: Tổng budget B_t cho chu kỳ hiện tại
             performance_monitor: PerformanceMonitor để lấy thông tin cải thiện
         """
-        # === KHỞI TẠO AGENTS CHƯA CHẠY ===
-        uninitialized_agents = [aid for aid, pulls in self.agent_pulls.items() if pulls == 0]
-        if uninitialized_agents:
-            agent_to_run = uninitialized_agents[0]
+        # === PARALLEL COLD START: Khởi tạo đồng thời tất cả agents ===
+        # Kiểm tra agents nào chưa đủ startup trials
+        agents_need_startup = [aid for aid, pulls in self.agent_pulls.items() 
+                               if pulls < self.n_startup_trials]
+        
+        if agents_need_startup:
             allocations = {agent_id: 0 for agent_id in self.agent_ids}
-            allocations[agent_to_run] = slice_budget
+            total_needed = sum(self.n_startup_trials - self.agent_pulls[aid] 
+                             for aid in agents_need_startup)
+            
+            if total_needed <= slice_budget:
+                # Đủ budget để cấp phát đầy đủ cho tất cả agents cần startup
+                for agent_id in agents_need_startup:
+                    remaining = self.n_startup_trials - self.agent_pulls[agent_id]
+                    allocations[agent_id] = remaining
+                
+                # Phân bổ budget dư cho agents đã có đủ startup trials (nếu có)
+                remaining_budget = slice_budget - sum(allocations.values())
+                if remaining_budget > 0:
+                    agents_ready = [aid for aid in self.agent_ids if aid not in agents_need_startup]
+                    if agents_ready:
+                        per_agent = remaining_budget // len(agents_ready)
+                        for agent_id in agents_ready:
+                            allocations[agent_id] = per_agent
+                        # Phần dư cho agent đầu tiên
+                        allocations[agents_ready[0]] += remaining_budget - (per_agent * len(agents_ready))
+            else:
+                # Không đủ budget → phân bổ tỷ lệ cho agents cần startup
+                for agent_id in agents_need_startup:
+                    remaining = self.n_startup_trials - self.agent_pulls[agent_id]
+                    proportion = remaining / total_needed
+                    allocations[agent_id] = int(slice_budget * proportion)
+                
+                # Điều chỉnh phần dư
+                allocated = sum(allocations.values())
+                if allocated < slice_budget:
+                    allocations[agents_need_startup[0]] += slice_budget - allocated
+            
             if self.verbose:
-                print(f"  [MetaController] Khởi tạo agent: {agent_to_run}")
+                startup_info = {aid: f"{self.agent_pulls[aid]}/{self.n_startup_trials}" 
+                               for aid in agents_need_startup}
+                print(f"  [MetaController] Parallel Cold Start: {startup_info}")
+                print(f"  [MetaController] Allocation: {allocations}")
             return allocations
 
         # === TÍNH TOÁN PERFORMANCE SCORE S_{i,t} ===
@@ -1578,13 +1615,16 @@ class AMSCO_Orchestrator:
         agent_ids = list(self.agents.keys())
 
         self.performance_monitor = PerformanceMonitor(agent_ids, max_history_per_agent=50)
+        # Tính n_startup_trials dựa trên slice_budget (mỗi agent nhận ~1/3 của 1 slice)
+        n_startup_per_agent = max(2, self.slice_budget // len(agent_ids))
         self.meta_controller = MetaController_UCB1(
             agent_ids, 
             verbose=self.verbose,
             alpha=0.7,      # Trọng số cho hiệu suất chi phí (exploitation)
             beta=0.3,       # Trọng số cho tiềm năng khám phá (exploration)
             gamma=1.0,      # Hệ số áp lực khai thác ban đầu (sẽ tăng dần)
-            epsilon=1e-5    # Hằng số ổn định số học
+            epsilon=1e-5,   # Hằng số ổn định số học
+            n_startup_trials=n_startup_per_agent  # Parallel cold start
         )
         self.agent_budget_usage = {agent_id: 0 for agent_id in agent_ids}
         self.agent_costs = {agent_id: [] for agent_id in agent_ids}  # Lưu chi phí thực thi
